@@ -45,3 +45,12 @@ test('Examen organizado por las cinco áreas oficiales y preguntas asociadas a c
   assert.ok(exam.slice(0,3).every(q=>q.passageTitle===title),'Lectura no está agrupada');
  }
 });
+
+test('Exámenes intermedios y avanzados evitan reciclar preguntas básicas de Español con otro encabezado',()=>{
+ for(const level of ['intermedio','avanzado'])for(let attempt=0;attempt<30;attempt++){
+  const {questions}=generateExam(level);
+  const spanish=questions.filter(q=>q.area==='espanol');
+  assert.equal(spanish.length,30);
+  assert.equal(spanish.filter(q=>q.reusedBasic).length,0,'No deben entrar reformulaciones cosméticas: '+level);
+ }
+});
