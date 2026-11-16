@@ -1,0 +1,288 @@
+/** Preguntas originales para cerrar huecos detectados por el auditor automático.
+ * Cada categoría oficial seleccionable tiene al menos un ítem por nivel en conjunto con otros bancos.
+ */
+const rows=[
+  [
+    "basico",
+    "espanol",
+    "Comprensión lectora",
+    "Análisis de textos",
+    "En un texto informativo, ¿qué indica el título «Cómo ahorrar agua en casa»?",
+    "El tema general que desarrolla el texto",
+    "El nombre del autor obligatoriamente",
+    "Un dato estadístico exacto",
+    "El final de una novela",
+    "Un título informativo anticipa el tema que se explicará; no garantiza nombres o cifras."
+  ],
+  [
+    "basico",
+    "espanol",
+    "Comprensión lectora",
+    "Lectura comparada",
+    "Texto A: «La lluvia aumentó». Texto B: «El río subió de nivel». ¿Qué relación entre los textos es razonable?",
+    "Ambos describen fenómenos que pueden relacionarse",
+    "Ambos dicen que no llovió",
+    "El segundo niega la existencia de ríos",
+    "El primero habla de astronomía",
+    "La lluvia y el incremento del caudal pueden relacionarse; no se afirma causalidad exclusiva."
+  ],
+  [
+    "intermedio",
+    "espanol",
+    "Comprensión lectora",
+    "Lenguaje figurado",
+    "En «Las noticias encendieron una esperanza», ¿qué efecto logra el verbo «encendieron»?",
+    "Representa el surgimiento de esperanza mediante una imagen",
+    "Informa un incendio literal",
+    "Explica un proceso químico real",
+    "Describe el voltaje de una noticia",
+    "Es lenguaje figurado: «encender» ilustra el despertar o fortalecimiento de esperanza."
+  ],
+  [
+    "intermedio",
+    "espanol",
+    "Gramática y semántica",
+    "Morfosintaxis",
+    "En «Las investigadoras presentaron sus conclusiones», ¿qué elemento debe permanecer en plural si se cambia el sujeto por «La investigadora»?",
+    "El complemento «conclusiones» puede permanecer en plural",
+    "El verbo «presentaron» sin cambios",
+    "El determinante «Las» antes del sujeto",
+    "La concordancia impide cambiar el sujeto",
+    "El verbo y determinante del sujeto pasan a singular («La investigadora presentó»), pero «sus conclusiones» puede seguir en plural."
+  ],
+  [
+    "avanzado",
+    "espanol",
+    "Gramática y semántica",
+    "Homonimia y polisemia",
+    "En «La clave de la puerta» y «La clave del problema» la palabra «clave» cambia de sentido. ¿Qué criterio permite reconocer el significado en cada caso?",
+    "Las relaciones semánticas con el contexto de cada enunciado",
+    "La longitud de la palabra aislada",
+    "El número de vocales",
+    "La posición en el diccionario exclusivamente",
+    "El entorno léxico determina si «clave» se refiere a un medio de acceso o a un elemento explicativo central."
+  ],
+  [
+    "intermedio",
+    "espanol",
+    "Gramática y semántica",
+    "Hiperonimia",
+    "¿Qué opción ordena correctamente de mayor a menor generalidad?",
+    "Animal → mamífero → perro",
+    "Perro → animal → mamífero",
+    "Mamífero → perro → animal",
+    "Animal → perro → mamífero",
+    "La inclusión de clases es jerárquica: todos los perros son mamíferos y todos los mamíferos animales."
+  ],
+  [
+    "basico",
+    "espanol",
+    "Redacción",
+    "Elisión y adición",
+    "¿Qué palabra conviene eliminar de «subió arriba al segundo piso» para evitar redundancia?",
+    "arriba",
+    "segundo",
+    "piso",
+    "subió",
+    "El verbo «subió» ya implica movimiento ascendente; «arriba» es redundante."
+  ],
+  [
+    "intermedio",
+    "espanol",
+    "Redacción",
+    "Generalización e integración",
+    "Se enumeran tres beneficios de leer: aprender vocabulario, conocer ideas y comprender textos. ¿Qué conclusión los integra mejor?",
+    "La lectura puede fortalecer diversas habilidades intelectuales",
+    "La lectura solo mejora vocabulario",
+    "Los textos impiden el aprendizaje",
+    "Los beneficios no tienen tema común",
+    "La conclusión agrupa los beneficios bajo un concepto común sin excluir indebidamente componentes."
+  ],
+  [
+    "intermedio",
+    "matematicas",
+    "Álgebra",
+    "Patrones algebraicos",
+    "Observa 1, 4, 9, 16, 25. ¿Cuál es el término siguiente y qué regla lo explica?",
+    "36, cuadrados de enteros consecutivos",
+    "30, suma constante de 5",
+    "35, suma constante de 10",
+    "26, números consecutivos",
+    "Los términos son n² para n=1,2,3,4,5. El siguiente es 6²=36."
+  ],
+  [
+    "intermedio",
+    "matematicas",
+    "Geometría",
+    "Semejanza",
+    "Dos figuras semejantes tienen razón de lados 3:2. Si el perímetro de la menor es 18 cm, ¿cuál es el perímetro de la mayor?",
+    "27 cm",
+    "12 cm",
+    "36 cm",
+    "54 cm",
+    "Los perímetros varían como los lados: 18×(3/2)=27 cm."
+  ],
+  [
+    "intermedio",
+    "naturales",
+    "Biología",
+    "Biomoléculas",
+    "¿Por qué una enzima puede perder actividad al cambiar drásticamente el pH?",
+    "El pH puede alterar su conformación y sitio activo",
+    "Las enzimas siempre se convierten en ADN",
+    "El pH cambia el número de cromosomas",
+    "Las enzimas son exclusivamente minerales",
+    "La estructura tridimensional de las proteínas depende de interacciones sensibles al pH, lo que modifica la función catalítica."
+  ],
+  [
+    "intermedio",
+    "naturales",
+    "Biología",
+    "Fotosíntesis",
+    "¿Qué producto de las reacciones luminosas aporta poder reductor al ciclo de Calvin?",
+    "NADPH",
+    "Glucógeno",
+    "ADN",
+    "Ácido láctico",
+    "En la fase luminosa se generan ATP y NADPH; este último aporta electrones para la reducción de carbono en el ciclo de Calvin."
+  ],
+  [
+    "intermedio",
+    "naturales",
+    "Biología",
+    "Clasificación biológica",
+    "Dos organismos comparten género pero son de especies diferentes. ¿Qué afirmación es correcta?",
+    "Comparten una categoría taxonómica más específica que la familia",
+    "Obligatoriamente son idénticos genéticamente",
+    "No pueden tener ancestros comunes",
+    "Pertenecen a reinos diferentes por definición",
+    "El género agrupa especies estrechamente relacionadas y es más específico que familia."
+  ],
+  [
+    "avanzado",
+    "naturales",
+    "Biología",
+    "Clasificación biológica",
+    "Un microorganismo unicelular carece de núcleo y de orgánulos delimitados por membrana. ¿Qué diagnóstico taxonómico celular está mejor justificado por esa evidencia?",
+    "Presenta organización celular procariota",
+    "Es necesariamente una célula vegetal eucariota",
+    "Es obligatoriamente un virus",
+    "Posee cloroplastos por definición",
+    "La ausencia de núcleo y orgánulos membranosos caracteriza organización procariota; los virus no son células."
+  ],
+  [
+    "intermedio",
+    "naturales",
+    "Física",
+    "Trabajo mecánico",
+    "Si una fuerza de 20 N forma 60° con un desplazamiento horizontal de 4 m, ¿cuál es el trabajo realizado por esa fuerza?",
+    "40 J",
+    "80 J",
+    "20 J",
+    "0 J",
+    "W=F·d·cos60°=20×4×0.5=40 J; solo la componente paralela realiza trabajo."
+  ],
+  [
+    "intermedio",
+    "naturales",
+    "Física",
+    "Fuentes de energía",
+    "Una central transforma energía potencial gravitatoria del agua almacenada en electricidad. ¿Qué fuente aprovecha principalmente?",
+    "Hidroeléctrica",
+    "Fotovoltaica",
+    "Eólica",
+    "Nuclear",
+    "Al descender, el agua mueve turbinas que acoplan generadores, convirtiendo energía hidráulica en eléctrica."
+  ],
+  [
+    "avanzado",
+    "naturales",
+    "Física",
+    "Fuentes de energía",
+    "Una región compara energía solar y eólica. La solar rinde más al mediodía y la eólica de noche. ¿Qué decisión aprovecha mejor la complementariedad observada?",
+    "Combinar fuentes y almacenamiento según perfiles horarios",
+    "Instalar solo solar sin considerar la noche",
+    "Descartar mediciones de demanda",
+    "Suponer producción constante en ambas fuentes",
+    "La complementariedad temporal y el almacenamiento pueden reducir variabilidad de suministro; exige evaluar perfiles reales."
+  ],
+  [
+    "intermedio",
+    "sociales",
+    "Historia de Honduras",
+    "Neoliberalismo",
+    "Un país reduce aranceles y privatiza empresas estatales dentro de reformas de mercado. ¿Qué orientación económica describen esas medidas?",
+    "Liberalización asociada a políticas neoliberales",
+    "Economía sin intercambio",
+    "Abolición del dinero",
+    "Cierre permanente de todas las fronteras",
+    "La apertura comercial y privatización aparecen en programas de reformas orientados al mercado, aunque sus resultados dependen del contexto."
+  ],
+  [
+    "intermedio",
+    "sociales",
+    "Historia universal",
+    "Conflictos contemporáneos",
+    "Un análisis compara crónicas de grupos enfrentados y documentos de organismos internacionales. ¿Qué método fortalece su fiabilidad?",
+    "Triangular fuentes independientes y contrastar fechas y hechos",
+    "Escoger solo el relato más emotivo",
+    "Eliminar toda fuente primaria",
+    "Dar por cierto cualquier titular",
+    "La triangulación reduce el sesgo de una fuente única y permite verificar convergencias y discrepancias."
+  ],
+  [
+    "intermedio",
+    "sociales",
+    "Ciencias sociales",
+    "Instituciones sociales",
+    "Una escuela adapta reglas de participación después de un cambio social. ¿Qué característica de las instituciones muestra?",
+    "Sus normas pueden transformarse con nuevas necesidades",
+    "Nunca tienen reglas",
+    "Son exclusivamente edificios",
+    "No influyen en conductas",
+    "Las instituciones coordinan roles y normas, y pueden ajustarse históricamente."
+  ],
+  [
+    "avanzado",
+    "sociales",
+    "Ciencias sociales",
+    "Sociología política",
+    "Una comunidad tiene representantes electos, pero las decisiones se toman sin consulta ni acceso a información. ¿Qué dimensión del poder político conviene analizar?",
+    "Relación entre representación, participación y transparencia",
+    "Solo el número de edificios públicos",
+    "Únicamente las condiciones climáticas",
+    "El total de transporte privado",
+    "La sociología política estudia cómo se distribuyen y ejercen decisiones, y cómo participan ciudadanía e instituciones."
+  ],
+  [
+    "intermedio",
+    "sociales",
+    "Ciencias sociales",
+    "Origen humano",
+    "¿Cuál conjunto de evidencias permite construir una explicación científica más completa sobre evolución humana?",
+    "Fósiles, genética comparada y contexto arqueológico",
+    "Solo relatos no verificables",
+    "Exclusivamente opiniones sin fechas",
+    "Únicamente dibujos actuales",
+    "La evidencia fósil, molecular y arqueológica aporta líneas independientes para reconstruir parentescos y cambios."
+  ],
+  [
+    "avanzado",
+    "sociales",
+    "Ciencias sociales",
+    "Origen humano",
+    "Se hallan fósiles datados y herramientas de piedra en capas distintas. ¿Qué inferencia exige mayor cautela?",
+    "Atribuir automáticamente todas las herramientas a la misma especie de los fósiles sin evidencias adicionales",
+    "Describir las capas en orden estratigráfico",
+    "Registrar el contexto de hallazgo",
+    "Contrastar fechas por métodos independientes",
+    "La asociación estratigráfica y temporal no identifica necesariamente al fabricante; hace falta evidencia contextual adicional."
+  ]
+];
+export const gapClosureQuestions=rows.map(([level,area,topic,subtopic,prompt,right,a,b,c,explanation],i)=>{
+ const values=[right,a,b,c],rotation=(i+1)%4,options=[...values.slice(rotation),...values.slice(0,rotation)];
+ return {id:'gap-closure-'+level+'-'+area+'-'+i,level,area,topic,subtopic,prompt,options,correct:options.indexOf(right),
+ explanation,wrongExplanation:'Esta opción no satisface el contexto o el procedimiento. '+explanation,
+ source:'Guía PHUMA 2026; pregunta original de cierre curricular',calibration:'pedagogical-not-official',
+ reasoningDepth:level==='avanzado'?'multi-step':level==='intermedio'?'applied':undefined};
+});
