@@ -1,5 +1,6 @@
 import {mathQuestion} from './mathEngine.js';
 import {spanishEditorialQuestions} from './spanishEditorialBank.js';
+import {disciplinaryQuestions} from './disciplinaryBank.js';
 import {spanishFundamentalExplanations} from './spanishExplanations.js';
 import {visualQuestions} from './visualBank.js';
 import {readingQuestions} from './readingBank.js';
@@ -59,7 +60,7 @@ function spanishQuestion(base,i,level){let [topic,subtopic,prompt,right,...wrong
  const q=fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i);
  return {...q,explanation:spanishFundamentalExplanations[i],wrongExplanation:'La opción elegida no corresponde al sentido del enunciado. '+spanishFundamentalExplanations[i],reusedBasic:level!=='basico',reviewStatus:level==='basico'?'original-foundation':'legacy-level-reframe'};
 }
-export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...spanishEditorialQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
+export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...spanishEditorialQuestions,...disciplinaryQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
  ...Array.from({length:90},(_,i)=>mathQuestion(level,i)),
  ...['naturales','sociales','blandas'].flatMap(area=>curated[area][level].map((row,i)=>fromFact(area,level,row,i)))
