@@ -100,7 +100,7 @@ export function generateExam(level,history=[]){
   // Agrupar reactivos vinculados a un mismo texto: se aproxima al formato
   // de pasaje seguido por varias preguntas de las prácticas de admisión.
   const passages=area.id==='espanol'?candidates.filter(q=>q.passage):[];
-  const passageGroups=Object.groupBy(passages,q=>q.passageTitle);
+  const passageGroups=passages.reduce((acc,q)=>{(acc[q.passageTitle]??=[]).push(q);return acc},{});
   const groups=Object.values(passageGroups).filter(g=>g.length>=3)
    .sort((a,b)=>b.filter(q=>!used.has(q.id)).length-a.filter(q=>!used.has(q.id)).length);
   const passageQuestions=groups.length?prioritize(groups[0]).slice(0,3):[];
@@ -116,7 +116,7 @@ export function generateExam(level,history=[]){
   const analytical=prioritize(candidates.filter(q=>q.reasoningDepth&&!seeded.some(m=>m.id===q.id))).slice(0,minReasoning);
   if(analytical.length<minReasoning)throw Error('Faltan ejercicios de razonamiento para '+area.id+'/'+level);
   const picked=new Set([...seeded,...analytical].map(q=>q.id));
-  const chosen=[...seeded,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-picked.size-minReasoning)];
+  const chosen=[...seeded,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-picked.size)];
   if(chosen.length!==area.count||new Set(chosen.map(q=>q.id)).size!==area.count)throw Error('Distribución de reactivos inválida: '+area.id+'/'+level);
   repeats+=chosen.filter(q=>used.has(q.id)).length;arr.push(...chosen);
  }
