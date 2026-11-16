@@ -19,5 +19,7 @@ jobs:
         run: npm test
       - name: Audit curricular coverage by level
         run: npm run audit
+      - name: Audit editorial quality and template diversity
+        run: npm run audit:quality
       - name: Build static website for Render
         run: npm run build
