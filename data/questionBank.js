@@ -119,8 +119,14 @@ export function generateExam(level,history=[]){
   const picked=new Set([...seeded,...analytical].map(q=>q.id));
   const chosen=[...seeded,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-picked.size)];
   if(chosen.length!==area.count||new Set(chosen.map(q=>q.id)).size!==area.count)throw Error('Distribución de reactivos inválida: '+area.id+'/'+level);
-  repeats+=chosen.filter(q=>used.has(q.id)).length;arr.push(...chosen);
+  repeats+=chosen.filter(q=>used.has(q.id)).length;
+  // El formato por sección permite resolver juntas las preguntas de una lectura,
+  // sin releer el mismo pasaje a lo largo de todo el examen.
+  const primaryPassage=passageQuestions[0]?.passageTitle;
+  const linked=chosen.filter(q=>q.passage&&q.passageTitle===primaryPassage);
+  const others=shuffle(chosen.filter(q=>!linked.includes(q)),Math.random);
+  arr.push(...linked,...others);
  }
- return {questions:shuffle(arr,Math.random),repeats};
+ return {questions:arr,repeats};
 }
 export function nextStudy({area,topic,subtopic,level,history=[]}){const matches=BANK.filter(q=>q.level===level&&(!area||q.area===area)&&(!topic||q.topic===topic)&&(!subtopic||q.subtopic===subtopic));const unseen=matches.filter(q=>!history.includes(q.id));const list=unseen.length?unseen:matches;return {question:list.length?list[Math.floor(Math.random()*list.length)]:null,recycled:!!matches.length&&!unseen.length,available:matches.length};}
