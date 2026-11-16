@@ -1,0 +1,743 @@
+/** Casos originales contextualizados al marco temático UNAH. Referentes: guía PRE-U UNAH 2026 y simulador PRONASA (nivel intermedio).
+ * La etiqueta de nivel es una decisión pedagógica, no una clasificación certificada por UNAH.
+ */
+const rows={
+  "intermedio": [
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Análisis de textos",
+      "Un informe observa una mejora después de incorporar tutorías, pero no compara con alumnos sin tutoría. ¿Cuál es la conclusión más prudente?",
+      "Se observó una mejora, pero no se probó que las tutorías fueran su única causa",
+      "Las tutorías causaron toda la mejora",
+      "La mejora fue imposible",
+      "Todos los alumnos aprendieron igual",
+      "La secuencia temporal no basta para atribuir causalidad sin controlar otros factores."
+    ],
+    [
+      "espanol",
+      "Redacción",
+      "Elisión y adición",
+      "¿Qué expresión puede eliminarse sin cambiar el significado de «El resultado final y definitivo se anunció ayer»?",
+      "final y definitivo (una de las dos expresiones)",
+      "ayer",
+      "se anunció",
+      "resultado",
+      "Final y definitivo son redundantes en ese contexto; eliminar uno mejora concisión sin perder información."
+    ],
+    [
+      "espanol",
+      "Gramática y semántica",
+      "Homonimia y polisemia",
+      "En «La copa del árbol protege del sol» y «Levantó la copa para brindar», ¿qué fenómeno ilustra la palabra copa?",
+      "Polisemia contextual",
+      "Antonimia",
+      "Hipérbole",
+      "Concordancia verbal",
+      "Una misma palabra adquiere significados relacionados o históricamente vinculados según el contexto; interpretar el contexto es imprescindible."
+    ],
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Lectura comparada",
+      "Texto A: «La biblioteca amplió su horario». Texto B: «Algunos usuarios piden más computadoras». ¿Qué conclusión integra ambos textos sin inventar datos?",
+      "El servicio amplió horario y existen solicitudes adicionales",
+      "La biblioteca compró computadoras nuevas",
+      "El horario se redujo",
+      "La biblioteca cerró",
+      "Solo se conocen dos hechos: ampliación del horario y petición de computadoras; no hay datos sobre compras o cierres."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Inecuaciones",
+      "Un estudiante tiene L 250 y cada libro cuesta L 45. Si además paga L 25 de transporte, ¿cuál es el máximo número entero de libros que puede comprar?",
+      "5",
+      "6",
+      "4",
+      "7",
+      "Se plantea 45x+25≤250: 45x≤225, por tanto x≤5; el máximo entero es 5."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Ecuaciones cuadráticas",
+      "¿Cuáles son las soluciones de x² − 5x + 6 = 0?",
+      "x=2 y x=3",
+      "x=−2 y x=−3",
+      "x=1 y x=6",
+      "x=−1 y x=−6",
+      "Se factoriza (x−2)(x−3)=0; cada factor puede ser cero."
+    ],
+    [
+      "matematicas",
+      "Geometría",
+      "Sólidos: área y volumen",
+      "Una caja rectangular tiene dimensiones 3 cm, 4 cm y 5 cm. ¿Cuál es su volumen?",
+      "60 cm³",
+      "47 cm³",
+      "12 cm³",
+      "94 cm³",
+      "Volumen del prisma rectangular = largo×ancho×alto = 3×4×5=60 cm³."
+    ],
+    [
+      "matematicas",
+      "Estadística y probabilidad",
+      "Dispersión de datos",
+      "Los conjuntos A={4,5,6} y B={1,5,9} tienen la misma media. ¿Cuál presenta mayor dispersión?",
+      "B",
+      "A",
+      "Ambos presentan igual dispersión",
+      "No puede compararse",
+      "Ambos tienen media 5; B tiene distancias a la media de 4,0,4 y A de 1,0,1."
+    ],
+    [
+      "matematicas",
+      "Aritmética",
+      "MCD y MCM",
+      "Dos alarmas suenan cada 12 y 18 minutos. Si coincidieron a las 9:00, ¿cuándo vuelven a coincidir?",
+      "9:36",
+      "9:18",
+      "9:30",
+      "10:12",
+      "El mínimo común múltiplo de 12 y 18 es 36; 36 minutos después de las 9:00 son las 9:36."
+    ],
+    [
+      "matematicas",
+      "Estadística y probabilidad",
+      "Tablas y gráficas",
+      "Una tabla registra 20, 30 y 50 estudiantes por grupo. ¿Qué porcentaje del total pertenece al segundo grupo?",
+      "30 %",
+      "20 %",
+      "50 %",
+      "60 %",
+      "El total es 100 y el segundo grupo tiene 30; 30/100×100 =30 %."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "División celular",
+      "Una célula diploide de 46 cromosomas completa meiosis. ¿Qué número de cromosomas tendrá cada célula haploide resultante?",
+      "23",
+      "46",
+      "92",
+      "12",
+      "La meiosis reduce a la mitad el número cromosómico, formando células haploides con 23 cromosomas."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Método científico",
+      "Se estudia si la luz influye en el crecimiento de plantas. Se mantiene igual el agua y tipo de planta. ¿Cuál es la variable independiente?",
+      "Cantidad de luz",
+      "Altura final",
+      "Tipo de planta mantenido constante",
+      "Cantidad de agua mantenida constante",
+      "La variable independiente es el factor que se manipula; el crecimiento es la variable dependiente."
+    ],
+    [
+      "naturales",
+      "Química",
+      "Compuestos inorgánicos",
+      "¿Cuál de los siguientes compuestos se clasifica como hidróxido?",
+      "NaOH",
+      "HCl",
+      "CO₂",
+      "NaCl",
+      "NaOH contiene el grupo hidróxido OH⁻ unido a un catión metálico; las alternativas son ácido, óxido y sal."
+    ],
+    [
+      "naturales",
+      "Química",
+      "Contaminación y agroquímicos",
+      "Tras aplicar fertilizante en exceso, aparecen proliferaciones algales en una laguna. ¿Cuál es el mecanismo más probable?",
+      "Entrada de nutrientes y eutrofización",
+      "Desaparición inmediata de nitrógeno",
+      "Formación de un vacío en el agua",
+      "Conversión directa del agua en petróleo",
+      "La escorrentía puede transportar nitrógeno y fósforo, favoreciendo eutrofización y disminución de oxígeno disuelto."
+    ],
+    [
+      "naturales",
+      "Física",
+      "Magnitudes y conversiones",
+      "Un vehículo recorre 900 m en 60 s a velocidad constante. ¿Cuál es su velocidad?",
+      "15 m/s",
+      "54 m/s",
+      "0.067 m/s",
+      "900 m/s",
+      "v=d/t=900/60=15 m/s; la unidad es metros por segundo."
+    ],
+    [
+      "sociales",
+      "Geografía",
+      "Husos horarios",
+      "Si una ciudad está en UTC−6 y otra en UTC−4, cuando la primera marca las 08:00, ¿qué hora tiene la segunda?",
+      "10:00",
+      "06:00",
+      "08:00",
+      "12:00",
+      "UTC−4 lleva dos horas de adelanto sobre UTC−6: 08:00+2 h=10:00."
+    ],
+    [
+      "sociales",
+      "Geografía",
+      "Indicadores sociodemográficos",
+      "Una región tiene 120,000 habitantes en 600 km². ¿Cuál es su densidad de población?",
+      "200 habitantes/km²",
+      "720 habitantes/km²",
+      "20 habitantes/km²",
+      "600 habitantes/km²",
+      "Densidad = población/superficie =120,000/600 =200 hab./km²."
+    ],
+    [
+      "sociales",
+      "Ciencias sociales",
+      "Estratificación social",
+      "Un estudio compara acceso a educación, ingresos y ocupaciones entre grupos. ¿Qué fenómeno social examina?",
+      "Estratificación social",
+      "Fotosíntesis",
+      "Movimiento rectilíneo",
+      "Deriva continental",
+      "La estratificación describe desigualdades y posiciones sociales asociadas con recursos y oportunidades."
+    ],
+    [
+      "sociales",
+      "Historia de Honduras",
+      "Enclave bananero",
+      "¿Qué rasgo permite identificar una economía de enclave exportador en la historia hondureña?",
+      "Alta dependencia de empresas externas y concentración de exportación",
+      "Producción exclusivamente para autoconsumo",
+      "Ausencia de comercio exterior",
+      "Rechazo total de infraestructura de transporte",
+      "Los enclaves bananeros se articularon en torno a capital externo, infraestructura y exportación, con impactos económicos y políticos."
+    ],
+    [
+      "sociales",
+      "Ciencias sociales",
+      "Sociología política",
+      "Un investigador analiza cómo se distribuye el poder entre Estado, grupos y ciudadanía. ¿Qué campo estudia principalmente?",
+      "Sociología política",
+      "Química orgánica",
+      "Fisiología celular",
+      "Geometría euclidiana",
+      "La sociología política estudia relaciones de poder, instituciones y comportamiento político en sociedad."
+    ],
+    [
+      "blandas",
+      "Toma de decisiones",
+      "Pensamiento crítico",
+      "Una encuesta escolar solo entrevistó a quienes asistieron a un taller voluntario. ¿Cuál es su principal limitación?",
+      "Sesgo de selección",
+      "Garantía de representatividad",
+      "Ausencia de respuestas",
+      "Imposibilidad de tabular",
+      "Quienes asistieron voluntariamente pueden diferir de quienes no asistieron; la muestra no representa necesariamente a toda la escuela."
+    ],
+    [
+      "blandas",
+      "Convivencia",
+      "Comunicación asertiva",
+      "Un compañero no cumplió un plazo por una emergencia. ¿Qué respuesta permite abordar el problema sin descalificarlo?",
+      "Preguntar qué ocurrió y acordar un plan concreto",
+      "Publicar acusaciones antes de escucharlo",
+      "Ignorar los plazos siempre",
+      "Quitarle todas las tareas sin diálogo",
+      "La asertividad combina escuchar hechos, comunicar expectativas y acordar medidas verificables."
+    ],
+    [
+      "blandas",
+      "Toma de decisiones",
+      "Resolución de problemas",
+      "En un proyecto fallan dos soluciones consecutivas. ¿Qué acción ofrece mejor fundamento para decidir qué intentar después?",
+      "Analizar resultados, restricciones y causas antes de formular otra hipótesis",
+      "Repetir al azar una solución",
+      "Aumentar recursos sin diagnóstico",
+      "Descartar toda medición",
+      "El análisis de causa y evidencia permite decidir y aprender de intentos previos."
+    ]
+  ],
+  "avanzado": [
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Análisis de textos",
+      "En una escuela, los alumnos que leen voluntariamente obtienen mejores notas. El estudio no midió apoyo familiar ni hábitos previos. ¿Qué conclusión es defendible?",
+      "Existe asociación, pero no puede atribuirse causalidad exclusiva a la lectura voluntaria",
+      "La lectura voluntaria explica necesariamente todas las notas",
+      "El apoyo familiar no importa en ningún caso",
+      "No existe relación entre lectura y resultados",
+      "Una correlación observada admite variables de confusión; no demuestra una causa exclusiva."
+    ],
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Lectura comparada",
+      "Informe A: las visitas al museo aumentaron 20 % respecto del año anterior. Informe B: el precio de entrada subió 10 %, pero no reporta ingresos. ¿Qué afirmación NO puede inferirse?",
+      "Los ingresos totales aumentaron exactamente 30 %",
+      "Se incrementó el número de visitas",
+      "Hubo un aumento en el precio de entrada",
+      "Los textos usan bases de comparación diferentes",
+      "Las variaciones porcentuales no se suman y faltan datos de entradas pagadas y estructura de ingresos."
+    ],
+    [
+      "espanol",
+      "Gramática y semántica",
+      "Morfosintaxis",
+      "«El informe de las investigadoras, que habían revisado los datos, fue publicado». ¿Qué expresión concuerda en plural con «investigadoras»?",
+      "habían revisado",
+      "fue publicado",
+      "El informe",
+      "publicado",
+      "El sujeto de la subordinada relativa es «las investigadoras», por eso se emplea «habían revisado» en plural; «fue publicado» concuerda con informe."
+    ],
+    [
+      "espanol",
+      "Redacción",
+      "Generalización e integración",
+      "Tres estudios encuentran efectos distintos de un método de enseñanza según edad y recursos. ¿Cuál es la integración más sólida?",
+      "Los resultados dependen del contexto y requieren comparación controlada",
+      "El método funciona igual en toda población",
+      "Los estudios se anulan mutuamente",
+      "La diferencia prueba que todos son falsos",
+      "La síntesis conserva las diferencias observadas y evita una generalización universal sin evidencia."
+    ],
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Lenguaje figurado",
+      "En «La ciudad despertó con sus calles enmudecidas», ¿qué interpretación mantiene el valor figurado sin leer literalmente el enunciado?",
+      "La ciudad se personifica y se destaca el silencio",
+      "Las calles poseen órganos del habla",
+      "La ciudad es una persona real",
+      "El texto ofrece una fórmula matemática",
+      "El despertar y el enmudecimiento atribuyen acciones humanas a lugares; se trata de personificación."
+    ],
+    [
+      "espanol",
+      "Gramática y semántica",
+      "Hiperonimia",
+      "Si «árbol» es hiperónimo de «pino» y «roble», ¿qué relación lógica es correcta?",
+      "Todo pino es árbol, pero no todo árbol es pino",
+      "Todo árbol es pino",
+      "Árbol y pino son antónimos",
+      "Pino es hiperónimo de árbol",
+      "El hiperónimo designa una categoría más general; pino es un tipo particular de árbol."
+    ],
+    [
+      "espanol",
+      "Redacción",
+      "Elisión y adición",
+      "En un texto técnico, «Se midieron 30 muestras. Las muestras fueron analizadas. Las muestras mostraron cambios». ¿Qué reformulación mejora cohesión sin alterar datos?",
+      "Se midieron 30 muestras, que luego se analizaron y mostraron cambios",
+      "Se midieron más de 30 muestras con cambios",
+      "Se analizaron muestras que no fueron medidas",
+      "Los cambios se observaron antes de medir",
+      "La sustitución de repeticiones por una oración relativa mantiene las tres proposiciones y mejora cohesión."
+    ],
+    [
+      "espanol",
+      "Comprensión lectora",
+      "Lectura comparada",
+      "Texto A presenta cifras de contaminación de 2018–2020; B describe medidas implementadas en 2024. ¿Qué cautela metodológica es imprescindible al relacionarlos?",
+      "No atribuir a las medidas de 2024 cambios registrados hasta 2020",
+      "Suponer que ambos textos miden el mismo período",
+      "Interpretar el texto B como demostración estadística del A",
+      "Concluir que no existió contaminación",
+      "Un hecho posterior no puede causar retrospectivamente variaciones medidas años antes."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Ecuaciones cuadráticas",
+      "Un rectángulo tiene ancho x y largo x+3. Su área es 40 cm². ¿Cuál es el ancho positivo?",
+      "5 cm",
+      "8 cm",
+      "−8 cm",
+      "4 cm",
+      "x(x+3)=40; x²+3x−40=(x+8)(x−5)=0; se descarta −8 por tratarse de una longitud."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Inecuaciones",
+      "Un servicio cobra L 120 fijos más L 35 por viaje. Con un presupuesto máximo de L 470, ¿cuántos viajes completos puede realizarse?",
+      "10",
+      "11",
+      "9",
+      "12",
+      "120+35n≤470 implica 35n≤350, de modo que n≤10."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Patrones algebraicos",
+      "Una sucesión tiene término general aₙ=2n²−n. ¿Cuál es la diferencia entre a₅ y a₄?",
+      "17",
+      "15",
+      "19",
+      "9",
+      "a₅=2·25−5=45 y a₄=2·16−4=28; la diferencia es 17."
+    ],
+    [
+      "matematicas",
+      "Geometría",
+      "Sólidos: área y volumen",
+      "Un tanque cilíndrico de radio 3 m y altura 4 m se llena al 50 %. Usa π≈3.14. ¿Qué volumen de agua contiene?",
+      "56.52 m³",
+      "113.04 m³",
+      "37.68 m³",
+      "18.84 m³",
+      "V total=πr²h≈3.14×9×4=113.04; a la mitad contiene 56.52 m³."
+    ],
+    [
+      "matematicas",
+      "Geometría",
+      "Semejanza",
+      "Una persona de 1.6 m proyecta sombra de 2 m; un árbol proyecta 7.5 m al mismo tiempo en terreno plano. ¿Cuál es su altura?",
+      "6 m",
+      "9.375 m",
+      "4.8 m",
+      "3.75 m",
+      "Triángulos semejantes: altura/sombra constante. h/7.5=1.6/2, luego h=6 m."
+    ],
+    [
+      "matematicas",
+      "Estadística y probabilidad",
+      "Dispersión de datos",
+      "Se evalúan 4 valores: 2, 4, 6 y 8. ¿Cuál es la varianza poblacional?",
+      "5",
+      "20",
+      "2.5",
+      "10",
+      "Media=5; suma de cuadrados de desviaciones=9+1+1+9=20; varianza poblacional=20/4=5."
+    ],
+    [
+      "matematicas",
+      "Estadística y probabilidad",
+      "Tablas y gráficas",
+      "Una escuela pasa de 80 a 100 alumnos y luego a 90. ¿Cuál es el cambio porcentual total respecto del inicio?",
+      "Aumento de 12.5 %",
+      "Aumento de 10 %",
+      "Disminución de 10 %",
+      "Aumento de 25 %",
+      "El cambio neto es 90−80=10; 10/80×100=12.5 %. No se suman variaciones porcentuales sucesivas."
+    ],
+    [
+      "matematicas",
+      "Estadística y probabilidad",
+      "Probabilidad",
+      "En una urna hay 3 bolas rojas y 2 azules. Se extraen dos sin reemplazo. ¿Cuál es la probabilidad de que ambas sean rojas?",
+      "3/10",
+      "9/25",
+      "6/25",
+      "1/2",
+      "P(roja primero)=3/5 y P(roja segunda|roja primero)=2/4; producto 6/20=3/10."
+    ],
+    [
+      "matematicas",
+      "Aritmética",
+      "Proporciones",
+      "Una tarea requiere 6 personas durante 8 días. Si 4 personas trabajan a igual ritmo, ¿cuántos días necesitan?",
+      "12",
+      "6",
+      "8",
+      "16",
+      "Trabajo total=6×8=48 jornadas-persona. Repartidas entre 4 personas, 48/4=12 días."
+    ],
+    [
+      "matematicas",
+      "Geometría",
+      "Áreas y perímetros",
+      "Un terreno rectangular de 12 m por 8 m tiene una zona cuadrada de 3 m de lado que no se sembrará. ¿Cuál es el área sembrada?",
+      "87 m²",
+      "96 m²",
+      "84 m²",
+      "105 m²",
+      "Área total 12×8=96; área excluida 3×3=9; área útil=87 m²."
+    ],
+    [
+      "matematicas",
+      "Álgebra",
+      "Funciones",
+      "Una tarifa lineal cuesta L 70 con 2 unidades y L 130 con 5 unidades. ¿Cuál es el costo con 8 unidades?",
+      "L 190",
+      "L 160",
+      "L 200",
+      "L 220",
+      "Pendiente=(130−70)/(5−2)=20; intercepto 30. Con 8 unidades: 20×8+30=190."
+    ],
+    [
+      "matematicas",
+      "Aritmética",
+      "MCD y MCM",
+      "Se deben empacar 84 lápices azules y 126 rojos en paquetes idénticos, sin mezclar colores ni dejar sobrantes. ¿Cuál es el mayor tamaño posible de cada paquete?",
+      "42",
+      "21",
+      "14",
+      "84",
+      "Máximo común divisor MCD(84,126)=42; cada paquete contiene como máximo 42 lápices del mismo color."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Biomoléculas",
+      "Una muestra muestra actividad enzimática que disminuye notablemente tras calentarse a 90 °C. ¿Qué explicación es más plausible?",
+      "Desnaturalización de la estructura proteica",
+      "Conversión completa de proteínas en ADN",
+      "Pérdida de todos los átomos de carbono",
+      "Producción espontánea de nuevos genes",
+      "Muchas enzimas son proteínas cuya estructura tridimensional se altera con altas temperaturas y disminuye su función."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Genética",
+      "Dos progenitores heterocigotos Aa producen descendencia. En un modelo mendeliano de dominancia completa, ¿qué proporción esperada tendrá genotipo aa?",
+      "25 %",
+      "50 %",
+      "75 %",
+      "100 %",
+      "Aa×Aa produce AA, Aa, Aa y aa; uno de cuatro genotipos es aa."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "División celular",
+      "Una célula diploide tiene 12 cromosomas antes de la replicación. Tras replicar el ADN, pero antes de separarse las cromátidas, ¿cuántos cromosomas y cromátidas tiene?",
+      "12 cromosomas y 24 cromátidas",
+      "24 cromosomas y 24 cromátidas",
+      "12 cromosomas y 12 cromátidas",
+      "24 cromosomas y 12 cromátidas",
+      "La replicación duplica cromátidas de cada cromosoma, no el número de centrómeros; siguen siendo 12 cromosomas, con 24 cromátidas."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Fotosíntesis",
+      "En un experimento se limita fuertemente la luz sin cambiar CO₂ ni agua. ¿Qué proceso se afecta de forma más inmediata?",
+      "Producción de ATP y NADPH en reacciones luminosas",
+      "Duplicación del ADN nuclear",
+      "Síntesis de proteínas en ribosomas animales",
+      "Formación de huesos",
+      "Las reacciones dependientes de luz producen ATP y NADPH usados posteriormente en el ciclo de Calvin."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Método científico",
+      "Se compara un fertilizante en dos parcelas, pero una recibe el doble de agua. ¿Cuál es el defecto principal del diseño?",
+      "Variable de confusión que impide atribuir diferencias solo al fertilizante",
+      "Ausencia de variable dependiente por definición",
+      "Imposibilidad de medir crecimiento",
+      "No se pueden formular hipótesis agrícolas",
+      "El riego cambia simultáneamente con el tratamiento y puede explicar las diferencias de crecimiento."
+    ],
+    [
+      "naturales",
+      "Química",
+      "Compuestos inorgánicos",
+      "Se mezcla un ácido fuerte y una base fuerte en proporciones estequiométricas en solución acuosa. ¿Cuál es la reacción característica?",
+      "Neutralización con formación de sal y agua",
+      "Fotosíntesis",
+      "Fisión nuclear",
+      "Cambio de isótopo",
+      "H⁺ y OH⁻ se combinan para formar agua y los iones restantes pueden formar una sal; es una neutralización ácido-base."
+    ],
+    [
+      "naturales",
+      "Química",
+      "Contaminación y agroquímicos",
+      "Una cuenca muestra nitratos elevados después de lluvias intensas en zonas de cultivo. ¿Qué combinación de medidas ataca mejor el mecanismo probable?",
+      "Reducir aplicación excesiva y establecer franjas vegetales de amortiguamiento",
+      "Aplicar más fertilizante antes de lluvia",
+      "Retirar toda la vegetación ribereña",
+      "Aumentar escorrentía superficial",
+      "Reducir el aporte de nutrientes y su transporte por escorrentía ayuda a disminuir contaminación difusa."
+    ],
+    [
+      "naturales",
+      "Física",
+      "Magnitudes y conversiones",
+      "Un ciclista avanza a 72 km/h. ¿Cuántos metros recorre en 15 segundos a velocidad constante?",
+      "300 m",
+      "1080 m",
+      "72 m",
+      "150 m",
+      "72 km/h =72/3.6=20 m/s. Distancia=20×15=300 m."
+    ],
+    [
+      "naturales",
+      "Física",
+      "Trabajo mecánico",
+      "Una fuerza horizontal constante de 40 N desplaza un objeto 5 m en su misma dirección. ¿Qué trabajo mecánico realiza?",
+      "200 J",
+      "8 J",
+      "45 J",
+      "0 J",
+      "W=F·d·cos(0°)=40×5=200 joules."
+    ],
+    [
+      "naturales",
+      "Biología",
+      "Cuerpo humano",
+      "Una persona presenta deficiencia de intercambio de gases en los alvéolos, aunque la tráquea esté libre. ¿Qué función resulta afectada principalmente?",
+      "Difusión de O₂ y CO₂ entre aire alveolar y sangre",
+      "Digestión de almidones en la boca",
+      "Producción de bilis",
+      "Contracción voluntaria del bíceps",
+      "Los alvéolos son superficies de intercambio gaseoso y permiten difusión con los capilares pulmonares."
+    ],
+    [
+      "sociales",
+      "Geografía",
+      "Husos horarios",
+      "Una conferencia empieza a las 14:30 en UTC−6. Un participante en UTC+1, sin considerar horario estacional, ¿a qué hora debe conectarse?",
+      "21:30",
+      "07:30",
+      "15:30",
+      "20:30",
+      "La diferencia es de siete horas: UTC+1 está 7 horas adelante de UTC−6; 14:30+7=21:30."
+    ],
+    [
+      "sociales",
+      "Geografía",
+      "Indicadores sociodemográficos",
+      "Dos municipios tienen poblaciones de 40,000 y 20,000 habitantes y áreas de 100 y 25 km². ¿Qué conclusión es correcta?",
+      "El segundo tiene mayor densidad pese a tener menos habitantes",
+      "El primero tiene mayor densidad",
+      "Ambos tienen igual densidad",
+      "El segundo tiene necesariamente mayor ingreso",
+      "Densidades: 40,000/100=400 y 20,000/25=800 habitantes/km², respectivamente."
+    ],
+    [
+      "sociales",
+      "Historia de Honduras",
+      "Neoliberalismo",
+      "Al comparar políticas económicas hondureñas recientes, ¿qué medida suele asociarse conceptualmente con reformas de orientación neoliberal?",
+      "Privatización y apertura comercial bajo reformas de mercado",
+      "Abolición total del intercambio comercial",
+      "Retorno obligatorio al trueque",
+      "Supresión universal de empresas privadas",
+      "En teoría económica, las reformas neoliberales suelen priorizar mercado, liberalización y privatizaciones; su alcance varía por país y período."
+    ],
+    [
+      "sociales",
+      "Historia universal",
+      "Conflictos contemporáneos",
+      "Dos noticias describen un conflicto: una aporta fechas y datos verificables; la otra solo una opinión anónima. ¿Cómo debe compararlas un lector crítico?",
+      "Priorizar fuentes verificables y contrastar ambas perspectivas",
+      "Aceptar la opinión por ser reciente",
+      "Descartar hechos porque hay desacuerdo",
+      "Suponer que una fuente basta siempre",
+      "Las evidencias verificables, fechas y contrastación de fuentes mejoran la interpretación histórica de conflictos."
+    ],
+    [
+      "sociales",
+      "Ciencias sociales",
+      "Estratificación social",
+      "Una familia tiene altos ingresos, pero acceso muy restringido a servicios sanitarios. ¿Qué inferencia metodológica es más sólida?",
+      "La estratificación incluye varias dimensiones y no se reduce a ingreso",
+      "El ingreso siempre garantiza acceso universal",
+      "El acceso sanitario determina exactamente todos los ingresos",
+      "No existen desigualdades multidimensionales",
+      "La posición social puede reflejar recursos, poder, servicios y oportunidades, que no siempre se corresponden."
+    ],
+    [
+      "sociales",
+      "Ciencias sociales",
+      "Instituciones sociales",
+      "Una comunidad enfrenta cambios en reglas familiares, escolares y laborales. ¿Cuál perspectiva permite analizar mejor estos cambios?",
+      "Comparar funciones, normas y relaciones de distintas instituciones sociales",
+      "Atribuirlos solo al clima",
+      "Medir únicamente la altura de edificios",
+      "Suponer que las instituciones no cambian",
+      "Familia, escuela y trabajo son instituciones con reglas y funciones sociales que evolucionan históricamente."
+    ],
+    [
+      "sociales",
+      "Ciencias sociales",
+      "Filosofía",
+      "Una persona afirma que una decisión es buena solo por ser legal. ¿Qué pregunta filosófica problematiza esa afirmación?",
+      "¿Lo legal coincide siempre con lo moralmente justificable?",
+      "¿Qué hora es en otro país?",
+      "¿Cuántos kilómetros mide una carretera?",
+      "¿Cuánto pesa una muestra?",
+      "La filosofía moral distingue normas legales de justificaciones éticas; su coincidencia no está garantizada."
+    ],
+    [
+      "sociales",
+      "Historia de Honduras",
+      "Enclave bananero",
+      "Al estudiar el enclave bananero, ¿qué conjunto de fuentes permitiría evaluar mejor su efecto económico y político?",
+      "Registros de empleo/exportación, leyes de concesión y testimonios de comunidades",
+      "Solo un anuncio de fruta",
+      "Una receta de cocina",
+      "Un mapa sin fechas ni referencias",
+      "Contrastar datos económicos, documentos institucionales y experiencia social permite una visión de múltiples dimensiones."
+    ],
+    [
+      "blandas",
+      "Toma de decisiones",
+      "Pensamiento crítico",
+      "Dos métodos presentan igual promedio de mejora, pero uno tiene resultados muy variables y el otro resultados consistentes. ¿Qué análisis permite decidir con mayor rigor?",
+      "Examinar dispersión, objetivos y riesgos antes de seleccionar",
+      "Elegir cualquiera porque la media basta siempre",
+      "Descartar ambos por tener la misma media",
+      "Ignorar necesidades individuales",
+      "La media por sí sola oculta variabilidad; evaluar riesgos y contexto permite decidir responsablemente."
+    ],
+    [
+      "blandas",
+      "Toma de decisiones",
+      "Resolución de problemas",
+      "Un equipo detecta que 80 % de fallas ocurren en dos pasos del proceso. ¿Cuál acción inicial es más razonable?",
+      "Priorizar diagnóstico y pruebas controladas en esos dos pasos",
+      "Modificar todos los pasos simultáneamente sin medir",
+      "Ocultar las fallas",
+      "Eliminar registros históricos",
+      "Concentrar análisis en las causas frecuentes permite usar recursos eficazmente y medir si los cambios funcionan."
+    ],
+    [
+      "blandas",
+      "Convivencia",
+      "Colaboración",
+      "Un proyecto tiene desacuerdos sobre prioridades y un plazo común. ¿Qué estrategia equilibra participación y eficacia?",
+      "Hacer explícitos criterios, escuchar alternativas y acordar responsabilidades verificables",
+      "Delegar todo a quien habla más fuerte",
+      "Excluir a quienes discrepan",
+      "Cambiar objetivos sin comunicarlo",
+      "El trabajo colaborativo requiere criterios transparentes, escucha y compromisos medibles."
+    ],
+    [
+      "blandas",
+      "Autogestión",
+      "Ética",
+      "Una persona detecta que una cifra favorable en su informe se basa en un error de cálculo. ¿Qué actuación es más responsable?",
+      "Corregir el cálculo y comunicar el cambio antes de entregar",
+      "Mantenerlo porque favorece su resultado",
+      "Eliminar todo el informe sin explicación",
+      "Atribuirlo a otra persona sin comprobar",
+      "La integridad académica exige comunicar errores materiales y corregirlos con transparencia."
+    ],
+    [
+      "blandas",
+      "Autogestión",
+      "Responsabilidad",
+      "Un alumno debe cumplir dos tareas importantes el mismo día y descubre que no podrá completar ambas a tiempo. ¿Qué decisión demuestra mejor planificación?",
+      "Evaluar prioridades, comunicar el conflicto y negociar un plan realista con antelación",
+      "Ocultar la dificultad hasta después del plazo",
+      "Prometer resultados imposibles",
+      "Abandonar ambas tareas",
+      "Una respuesta responsable reconoce restricciones, informa oportunamente y propone un plan viable."
+    ]
+  ]
+};
+export const enrichmentQuestions=Object.entries(rows).flatMap(([level,entries])=>entries.map((r,i)=>{
+ const [area,topic,subtopic,prompt,right,a,b,c,explanation]=r;
+ const options=[right,a,b,c];const offset=i%4;const rotated=[...options.slice(offset),...options.slice(0,offset)];
+ return {id:'enriched-'+level+'-'+area+'-'+i,level,area,topic,subtopic,prompt,options:rotated,correct:rotated.indexOf(right),
+ explanation,wrongExplanation:'La alternativa seleccionada no satisface las condiciones del caso. '+explanation,
+ source:'Problema original de razonamiento; guía UNAH 2026 y referencia pedagógica PRONASA.',
+ reasoningDepth:level==='avanzado'?'multi-step':'applied',calibration:'pedagogical-not-official'};
+}));
