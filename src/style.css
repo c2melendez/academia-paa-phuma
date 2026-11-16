@@ -27,3 +27,17 @@ html[data-theme=dark] .question-figure{background:#eef5fb;border-color:#65758a;c
 .reading-stimulus p{margin:12px 0 0;max-width:85ch;white-space:pre-wrap;line-height:1.8}
 [data-theme="dark"] .reading-stimulus{background:#1b3041;color:#e0f0f9}
 @media(max-width:600px){.reading-stimulus{padding:14px 16px}}
+
+
+/* Offline question quality reports */
+.report-entry{margin:18px 0 8px;display:flex;align-items:center;justify-content:flex-start}
+.report-toggle{font-size:.91rem}
+.report-form{margin:20px 0;padding:20px;border:1px solid #b5c6d7;border-left:4px solid #347e9b;border-radius:12px;background:#edf6f9;color:#253b53}
+.report-form h3{margin:0 0 8px}
+.report-form p{line-height:1.55;margin:0 0 13px}
+.report-form label{display:block;margin:11px 0 13px;font-weight:600}
+.report-form select,.report-form textarea{display:block;width:100%;margin-top:6px;border:1px solid #849aac;border-radius:8px;padding:11px;background:white;color:#22344b;font:inherit;min-height:42px}
+.report-form textarea{resize:vertical;min-height:90px}
+.report-form button{margin-top:2px}
+[data-theme="dark"] .report-form{background:#21364a;color:#e5effa;border-color:#53718a}
+[data-theme="dark"] .report-form select,[data-theme="dark"] .report-form textarea{background:#14263a;color:#f1f7ff;border-color:#6f8599}
