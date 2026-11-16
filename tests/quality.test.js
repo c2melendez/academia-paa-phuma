@@ -62,3 +62,13 @@ test('Diversidad de métodos matemáticos: máximo dos ítems por familia parame
   for(const [family,count] of counts)assert.ok(count<=2,'Familia '+family+' repetida '+count+' veces en nivel '+level);
  }
 });
+
+test('Fundamentos lingüísticos específicos en 36 preguntas base y sus versiones de repaso',()=>{
+ for(const level of ['basico','intermedio','avanzado'])for(let i=0;i<36;i++){
+  const q=BANK.find(q=>q.id==='espanol-'+level+'-'+i);
+  assert.ok(q,'Falta pregunta '+level+'/'+i);
+  assert.ok(q.explanation.length>100,'Explicación superficial '+q.id);
+  assert.ok(!q.explanation.startsWith('La respuesta correcta es'),'Texto genérico '+q.id);
+  assert.equal(q.reusedBasic,level!=='basico');
+ }
+});
