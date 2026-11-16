@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {BANK,coverage,validateBank,generateExam} from '../data/questionBank.js';
+test('Banco válido y cobertura de 120 en los tres niveles',()=>assert.deepEqual(validateBank(),[]));
+test('Simulacros sin preguntas repetidas dentro del intento',()=>{for(const level of ['basico','intermedio','avanzado']){let {questions}=generateExam(level);assert.equal(questions.length,120);assert.equal(new Set(questions.map(x=>x.id)).size,120);for(const [id,n] of Object.entries({espanol:30,matematicas:30,naturales:20,sociales:20,blandas:20}))assert.equal(questions.filter(x=>x.area===id).length,n);}});
+test('Sin error de respuesta correcta ni opciones repetidas',()=>{for(const q of BANK){assert.equal(q.options.length,4);assert.equal(new Set(q.options).size,4);assert.ok(q.options[q.correct]);}});
