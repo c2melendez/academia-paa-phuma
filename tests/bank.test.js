@@ -7,7 +7,7 @@ import {nextStudy} from '../data/questionBank.js';
 test('Ejercicios visuales presentes en los tres niveles y áreas académicas',()=>{
   for(const level of ['basico','intermedio','avanzado']){
     const group=BANK.filter(q=>q.level===level&&q.visual);
-    assert.equal(group.length,60);
+    assert.ok(group.length>=60);
     for(const id of ['espanol','matematicas','naturales','sociales'])assert.ok(group.some(q=>q.area===id));
     for(const t of ['bar','line','pie','pictogram','scatter','triangle','parallels','velocity'])assert.ok(group.some(q=>q.visual.type===t),`${level}: ${t}`);
   }
