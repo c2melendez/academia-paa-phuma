@@ -28,3 +28,9 @@ test('Ninguna categoría o subtema visible en el selector queda sin ejercicios',
   assert.ok(BANK.some(q=>q.area===a.id&&q.topic===topic&&q.subtopic===subtopic),'Subtema vacío: '+a.id+'/'+topic+'/'+subtopic);
  }
 });
+
+test('Los tres niveles incluyen al menos una pregunta por subtema del catálogo',()=>{
+ for(const a of AREAS)for(const [topic,subs] of Object.entries(a.topics))for(const subtopic of subs)
+ for(const level of ['basico','intermedio','avanzado'])
+  assert.ok(BANK.some(q=>q.area===a.id&&q.topic===topic&&q.subtopic===subtopic&&q.level===level), 'Cobertura insuficiente: '+a.id+'/'+topic+'/'+subtopic+'/'+level);
+});
