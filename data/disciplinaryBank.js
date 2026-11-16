@@ -120,10 +120,10 @@ export const disciplinaryQuestions=[
       "150 m"
     ],
     "correct": 0,
-    "explanation": "2,5 minutos equivalen a 150 segundos; d=vt=6×150=900 m.",
-    "wrongExplanation": "La alternativa elegida no responde a los datos y principios del caso. 2,5 minutos equivalen a 150 segundos; d=vt=6×150=900 m.",
+    "explanation": "Primero se convierte el tiempo a segundos: 2,5 × 60 = 150 s. Para velocidad constante, distancia = velocidad × tiempo; 6 m/s × 150 s = 900 metros.",
+    "wrongExplanation": "La alternativa elegida no responde a los datos y principios del caso. Primero se convierte el tiempo a segundos: 2,5 × 60 = 150 s. Para velocidad constante, distancia = velocidad × tiempo; 6 m/s × 150 s = 900 metros.",
     "optionExplanations": {
-      "0": "2,5 minutos equivalen a 150 segundos; d=vt=6×150=900 m.",
+      "0": "Primero se convierte el tiempo a segundos: 2,5 × 60 = 150 s. Para velocidad constante, distancia = velocidad × tiempo; 6 m/s × 150 s = 900 metros.",
       "1": "15 confunde unidades de velocidad y duración.",
       "2": "360 surge de tratar incorrectamente la conversión temporal.",
       "3": "150 es el tiempo en segundos, no la distancia en metros."
@@ -432,10 +432,10 @@ export const disciplinaryQuestions=[
       "4 J"
     ],
     "correct": 0,
-    "explanation": "Por el teorema trabajo–energía, W=ΔK=½mv²=½×2×4²=16 J.",
-    "wrongExplanation": "La alternativa elegida no responde a los datos y principios del caso. Por el teorema trabajo–energía, W=ΔK=½mv²=½×2×4²=16 J.",
+    "explanation": "Por el teorema trabajo–energía, el trabajo neto es el cambio de energía cinética. Parte del reposo, por lo que W = ½ × 2 kg × (4 m/s)² = 16 joules.",
+    "wrongExplanation": "La alternativa elegida no responde a los datos y principios del caso. Por el teorema trabajo–energía, el trabajo neto es el cambio de energía cinética. Parte del reposo, por lo que W = ½ × 2 kg × (4 m/s)² = 16 joules.",
     "optionExplanations": {
-      "0": "Por el teorema trabajo–energía, W=ΔK=½mv²=½×2×4²=16 J.",
+      "0": "Por el teorema trabajo–energía, el trabajo neto es el cambio de energía cinética. Parte del reposo, por lo que W = ½ × 2 kg × (4 m/s)² = 16 joules.",
       "1": "8 J es la mitad del resultado y omite parte del cuadrado de la velocidad.",
       "2": "32 J duplica incorrectamente el resultado.",
       "3": "4 J es el valor de v, no la energía."
