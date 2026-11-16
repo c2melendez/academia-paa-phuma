@@ -1,3 +1,4 @@
+import {visualQuestions} from './visualBank.js';
 import {curated} from './curated.js';
 import {AREAS,LEVELS} from '../src/catalog.js';
 const spanishFacts=[
@@ -70,12 +71,26 @@ function mathQuestion(level,i){const tier={basico:0,intermedio:1,avanzado:2}[lev
  opts=[...new Set(opts.map(String))];for(let k=1;opts.length<4;k++)opts.push(String(correct)+'+'+k);const ordered=shuffle(opts,r);
  return {id:`matematicas-${level}-${i}`,area:'matematicas',topic,subtopic,level,prompt,options:ordered,correct:ordered.indexOf(String(correct)),explanation:reason,wrongExplanation:`La respuesta correcta es ${correct}. Revisa la operación indicada: ${reason}`,source:'Ejercicio original parametrizado; temas de guías PAA y PHUMA.'};
 }
-export const BANK=[...LEVELS.flatMap(({id:level})=>[
+export const BANK=[...visualQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
  ...Array.from({length:90},(_,i)=>mathQuestion(level,i)),
  ...['naturales','sociales','blandas'].flatMap(area=>curated[area][level].map((row,i)=>fromFact(area,level,row,i)))
 ])];
 export function coverage(){return LEVELS.map(l=>({level:l.id,areas:AREAS.map(a=>({area:a.id,need:a.count,available:BANK.filter(q=>q.level===l.id&&q.area===a.id).length}))}))}
 export function validateBank(){const ids=new Set();const errors=[];for(const q of BANK){if(ids.has(q.id))errors.push(`ID duplicado ${q.id}`);ids.add(q.id);if(q.options.length!==4||new Set(q.options).size!==4)errors.push(`Opciones inválidas ${q.id}`);if(!(q.correct>=0&&q.correct<4)||!q.explanation||!q.topic||!q.subtopic)errors.push(`Registro incompleto ${q.id}`)}for(const level of coverage())for(const a of level.areas)if(a.available<a.need)errors.push(`Faltan preguntas ${level.level}/${a.area}`);return errors}
-export function generateExam(level,history=[]){const used=new Set(history);const arr=[];let repeats=0;for(const area of AREAS){const candidates=BANK.filter(q=>q.level===level&&q.area===area.id);if(candidates.length<area.count)throw Error(`Banco insuficiente para ${area.label} en ${level}`);const unseen=candidates.filter(q=>!used.has(q.id));const seen=candidates.filter(q=>used.has(q.id));let chosen=[...shuffle(unseen,Math.random),...shuffle(seen,Math.random)].slice(0,area.count);repeats+=chosen.filter(x=>used.has(x.id)).length;arr.push(...chosen)}return {questions:shuffle(arr,Math.random),repeats}}
+export function generateExam(level,history=[]){
+ const used=new Set(history),arr=[];let repeats=0;
+ const minimumVisuals={espanol:2,matematicas:4,naturales:1,sociales:1,blandas:0};
+ for(const area of AREAS){
+  const candidates=BANK.filter(q=>q.level===level&&q.area===area.id);
+  if(candidates.length<area.count)throw Error(`Banco insuficiente para ${area.label} en ${level}`);
+  const prioritize=list=>[...shuffle(list.filter(q=>!used.has(q.id)),Math.random),...shuffle(list.filter(q=>used.has(q.id)),Math.random)];
+  const required=minimumVisuals[area.id]||0;
+  const mandatory=prioritize(candidates.filter(q=>q.visual)).slice(0,required);
+  if(mandatory.length<required)throw Error(`Banco visual insuficiente para ${area.label} en ${level}`);
+  const chosen=[...mandatory,...prioritize(candidates.filter(q=>!mandatory.some(m=>m.id===q.id))).slice(0,area.count-required)];
+  repeats+=chosen.filter(q=>used.has(q.id)).length;arr.push(...chosen);
+ }
+ return {questions:shuffle(arr,Math.random),repeats};
+}
 export function nextStudy({area,topic,subtopic,level,history=[]}){const matches=BANK.filter(q=>q.level===level&&(!area||q.area===area)&&(!topic||q.topic===topic)&&(!subtopic||q.subtopic===subtopic));const unseen=matches.filter(q=>!history.includes(q.id));const list=unseen.length?unseen:matches;return {question:list.length?list[Math.floor(Math.random()*list.length)]:null,recycled:!!matches.length&&!unseen.length,available:matches.length};}

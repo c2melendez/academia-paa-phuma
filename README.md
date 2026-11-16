@@ -12,8 +12,8 @@ npm run build
 
 ## Publicación
 
-- **GitHub Pages**: incluido `.github/workflows/deploy.yml`, que ejecuta pruebas, compila y despliega en cada push a `main`. En Settings → Pages seleccionar **GitHub Actions** como fuente. La web utiliza rutas relativas y funciona en subrutas de GitHub Pages.
-- **Render**: crear Static Site conectado al repositorio, construir con `npm run build` y directorio de publicación `dist`; `render.yaml` ya incluye los valores.
+- **GitHub Actions**: `.github/workflows/deploy.yml` valida el banco y compila tras cada actualización. No despliega a Pages por limitaciones de permisos en este repositorio.
+- **Render (publicado)**: https://academia-paa-phuma.onrender.com . Static Site vinculado a `main`, comando `npm test && npm run build`, publicación `dist` con despliegue automático.
 
 ## Características
 
@@ -25,7 +25,7 @@ npm run build
 
 ## Banco y limitaciones
 
-`data/curated.js` recoge preguntas originales conceptuales, `data/questionBank.js` construye el banco y parametriza ejercicios matemáticos. La validación comprueba IDs, 4 alternativas diferentes y cobertura por área y nivel. A fecha de esta versión, el sistema contiene **576 preguntas** distribuidas entre los tres niveles; la cifra exacta se muestra en la portada. Algunas destrezas de Español se practican con el mismo material base y un enunciado adaptado a dificultad: esto **no equivale a tres fuentes independientes**. En Matemáticas existen ejercicios con números diferentes, pero con patrones de resolución comunes. La política de no repetición funciona a nivel de IDs y prioriza preguntas no vistas entre simulacros; al agotarse las opciones nuevas avisa y reutiliza, nunca duplica preguntas dentro de un simulacro.
+`data/curated.js` recoge preguntas originales conceptuales, `data/questionBank.js` construye el banco, `data/visualBank.js` aporta 180 ejercicios con datos gráficos originales, y `src/visualRenderer.js` dibuja diagramas accesibles en SVG sin descargar imágenes externas. La validación comprueba IDs, 4 alternativas diferentes y cobertura por área y nivel. A fecha de esta versión, el sistema contiene **756 preguntas** distribuidas entre los tres niveles; la cifra exacta se muestra en la portada. Algunas destrezas de Español se practican con el mismo material base y un enunciado adaptado a dificultad: esto **no equivale a tres fuentes independientes**. En Matemáticas existen ejercicios con números diferentes, pero con patrones de resolución comunes. La política de no repetición funciona a nivel de IDs y prioriza preguntas no vistas entre simulacros; al agotarse las opciones nuevas avisa y reutiliza, nunca duplica preguntas dentro de un simulacro.
 
 El contenido es material didáctico **no oficial**, sin afiliación con UNAH o College Board. Los temas proceden de las guías suministradas por el usuario; los ítems no son copias literales de pruebas. Las habilidades blandas usan escenarios razonados propuestos para práctica y sus subtemas no deben considerarse temario oficial de PHUMA. Antes de usarse como evaluación de alto impacto se recomienda revisión de expertos de cada materia y profesores de Honduras.
 
@@ -38,3 +38,11 @@ El contenido es material didáctico **no oficial**, sin afiliación con UNAH o C
 ## Privacidad
 
 Los datos se almacenan localmente; no hay analítica, cookies de seguimiento ni envío de información personal.
+
+## Ejercicios con figuras y gráficos (versión 2)
+
+- **180 ejercicios visuales** (60 por dificultad) además del banco previo. Tipos: barras, líneas, sectores circulares, pictogramas, diagramas de dispersión cartesiana, triángulos rectángulos, paralelas cortadas por transversal y velocidad-tiempo.
+- Los ejercicios visuales aparecen **en modo estudio y en modo examen**. Cada simulacro exige como mínimo 2 preguntas visuales en Español, 4 en Matemáticas, 1 en Naturales y 1 en Sociales (8 en total), manteniendo las 120 preguntas y su distribución oficial de áreas.
+- Originales basados en **tipos de estímulos**, no en copias de preguntas o imágenes con copyright. Referencias: *Guía PRE-U UNAH 2026*, páginas impresas 23–26, 33, 53–58; *PAA, Prueba de práctica*, ejercicios de Matemáticas con barras/diagramas/figuras; *PAA, Guía de estudio* (College Board), apartados de análisis cuantitativo, gráficos y geometría.
+- Algunos ejercicios reusan una estructura gráfica con valores diferentes; existe diversidad de estímulos, pero no deben interpretarse como 180 problemas conceptualmente independientes. Los datos demográficos o de talleres son **hipotéticos**, no estadísticas reales.
+- Las imágenes se generan localmente como SVG responsivo con descripción accesible; se conservan en las sesiones de examen guardadas y en su revisión posterior.
