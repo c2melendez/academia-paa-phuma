@@ -22,3 +22,9 @@ test('Los fundamentos incorporados cubren criterios científicos y sociales de l
  for(const subtopic of topics)assert.ok(BANK.some(q=>q.subtopic===subtopic),'Sin preguntas para '+subtopic);
  assert.deepEqual(validateBank(),[]);
 });
+
+test('Ninguna categoría o subtema visible en el selector queda sin ejercicios',()=>{
+ for(const a of AREAS)for(const [topic,subs] of Object.entries(a.topics))for(const subtopic of subs){
+  assert.ok(BANK.some(q=>q.area===a.id&&q.topic===topic&&q.subtopic===subtopic),'Subtema vacío: '+a.id+'/'+topic+'/'+subtopic);
+ }
+});
