@@ -103,3 +103,14 @@ Se añadieron **24 ejercicios originales** (12 intermedios y 12 avanzados) de Ci
 Ahora puedes **reportar una pregunta problemática** desde modo estudio, examen o revisión. Los informes se almacenan solo en el navegador y se pueden exportar en JSON desde **Mi progreso**. Por privacidad, **no se envían automáticamente**, no generan issues en GitHub y no incluyen la respuesta del alumno. Las notas son voluntarias y deben omitir datos personales. También es posible borrar los informes sin borrar los resultados.
 
 El banco contiene **989 registros identificados**; **311** disponen de una explicación específica por cada alternativa. Los demás mantienen fundamentos de solución, con oportunidades de mejora editorial. Consulta [docs/auditoria-naturales-sociales-reportes-2026.md](docs/auditoria-naturales-sociales-reportes-2026.md) y ejecuta `npm run audit:quality` para el estado verificable.
+
+
+## Desempeño por pregunta y preparación de un estudio piloto (noviembre de 2026)
+
+La sección **Mi progreso** incluye ahora un panel local de estadísticas para cada reactivo: respuestas, aciertos, porcentaje, tiempo medio medido y filtros por materia y dificultad. Los datos distinguen estudio y examen, se pueden **exportar voluntariamente** en JSON o eliminar sin borrar el historial de notas.
+
+Los indicadores «Reforzar», «Dominado en práctica» y «Revisar tiempo» se habilitan solo cuando la misma pregunta acumula al menos **5 intentos** en este navegador. Se trata de pistas de estudio personales, **no de dificultad psicométrica poblacional**. Los reportes manuales de posibles errores siguen siendo locales y no constituyen evidencia automática de ambigüedad. No se recopilan respuestas elegidas, cuentas o información personal, ni se envían estadísticas a un servidor.
+
+Las métricas registran observaciones nuevas; **no reconstruyen tiempos de intentos anteriores**. En el examen se consolida un intento por pregunta respondida únicamente cuando se entrega el simulacro. La media de tiempo es aproximada, con exclusión de pausas conocidas y límite por respuesta. El porcentaje y el puntaje referencial /1600 del simulacro se conservan sin modificación.
+
+Para prevenir regresiones, la compilación requiere la verificación de sintaxis `npm run check:syntax` y la suite incluye una prueba integrada de los recorridos de estudio, examen y estadísticas. Véase el documento [Métricas locales y protocolo de piloto](docs/metricas-locales-y-piloto-2026.md).
