@@ -41,3 +41,27 @@ html[data-theme=dark] .question-figure{background:#eef5fb;border-color:#65758a;c
 .report-form button{margin-top:2px}
 [data-theme="dark"] .report-form{background:#21364a;color:#e5effa;border-color:#53718a}
 [data-theme="dark"] .report-form select,[data-theme="dark"] .report-form textarea{background:#14263a;color:#f1f7ff;border-color:#6f8599}
+
+
+/* Estadísticas anónimas de práctica. Visualización solo en navegador. */
+.item-metrics{margin-top:22px}
+.item-metrics .section-head{margin-top:0}
+.item-metrics .section-head h2{margin-top:7px}
+.analytics-filters{display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:14px;margin:20px 0}
+.analytics-filters label{font-size:13px;font-weight:700;color:inherit}
+.analytics-filters select{width:100%;margin-top:7px;padding:11px;border:1px solid #c6d1de;border-radius:9px;background:transparent;color:inherit}
+.analytics-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.analytics-kpis>div{border:1px solid #e4eaf1;border-radius:11px;padding:16px;min-width:0}
+.analytics-kpis strong{display:block;font-size:clamp(18px,2.7vw,25px);font-variant-numeric:tabular-nums}
+.analytics-kpis span{display:block;color:#748097;font-size:12px;margin-top:4px}
+.item-metrics table{min-width:760px}
+.item-metrics td{vertical-align:top}
+.item-metrics td small{display:block;color:#6b7b90;font-size:12px;max-width:280px;margin-top:4px}
+.status-text{font-weight:700;font-size:12px;white-space:nowrap}
+.status-text.needs-practice{color:#b04b30}
+.status-text.mastered{color:#087862}
+.status-text.insufficient{color:#76849a}
+.status-text.reported{color:#9b641b}
+.status-text.slow{color:#9b641b}
+@media(max-width:720px){.analytics-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.analytics-filters{grid-template-columns:1fr}}
