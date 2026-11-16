@@ -1,4 +1,5 @@
 import {mathQuestion} from './mathEngine.js';
+import {spanishEditorialQuestions} from './spanishEditorialBank.js';
 import {visualQuestions} from './visualBank.js';
 import {readingQuestions} from './readingBank.js';
 import {precisionQuestions} from './precisionBank.js';
@@ -54,9 +55,9 @@ function fromFact(area,level,row,i){let [topic,subtopic,prompt,right,...rest]=ro
 function spanishQuestion(base,i,level){let [topic,subtopic,prompt,right,...wrong]=base;const labels={basico:'',intermedio:'Examina el texto o enunciado y elige la opción más precisa. ',avanzado:'Evalúa cuidadosamente la interpretación y descarta los distractores. '};
  // Different stimuli at each level, while keeping logically valid options; same academic skill reviewed with increasing task framing.
  const modifiers={basico:'',intermedio:' Justifica mentalmente tu elección atendiendo al contexto.',avanzado:' Considera el sentido completo y no solo palabras aisladas.'};
- return fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i);
+ return {...fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i),reusedBasic:level!=='basico',reviewStatus:level==='basico'?'original-foundation':'legacy-level-reframe'};
 }
-export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
+export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...spanishEditorialQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
  ...Array.from({length:90},(_,i)=>mathQuestion(level,i)),
  ...['naturales','sociales','blandas'].flatMap(area=>curated[area][level].map((row,i)=>fromFact(area,level,row,i)))
@@ -67,7 +68,7 @@ export function generateExam(level,history=[]){
  const used=new Set(history),arr=[];let repeats=0;
  const minimumVisuals={espanol:2,matematicas:4,naturales:1,sociales:1,blandas:0};
  for(const area of AREAS){
-  const candidates=BANK.filter(q=>q.level===level&&q.area===area.id);
+  const candidates=BANK.filter(q=>q.level===level&&q.area===area.id&&!(area.id==='espanol'&&level!=='basico'&&q.reusedBasic));
   if(candidates.length<area.count)throw Error(`Banco insuficiente para ${area.label} en ${level}`);
   const prioritize=list=>[...shuffle(list.filter(q=>!used.has(q.id)),Math.random),...shuffle(list.filter(q=>used.has(q.id)),Math.random)];
   const required=minimumVisuals[area.id]||0;
@@ -108,4 +109,4 @@ export function generateExam(level,history=[]){
  }
  return {questions:arr,repeats};
 }
-export function nextStudy({area,topic,subtopic,level,history=[]}){const matches=BANK.filter(q=>q.level===level&&(!area||q.area===area)&&(!topic||q.topic===topic)&&(!subtopic||q.subtopic===subtopic));const unseen=matches.filter(q=>!history.includes(q.id));const list=unseen.length?unseen:matches;return {question:list.length?list[Math.floor(Math.random()*list.length)]:null,recycled:!!matches.length&&!unseen.length,available:matches.length};}
+export function nextStudy({area,topic,subtopic,level,history=[]}){const matches=BANK.filter(q=>q.level===level&&(!area||q.area===area)&&(!topic||q.topic===topic)&&(!subtopic||q.subtopic===subtopic));const fresh=matches.filter(q=>!q.reusedBasic);const unseen=fresh.filter(q=>!history.includes(q.id));const fallback=matches.filter(q=>!history.includes(q.id));const list=unseen.length?unseen:fallback.length?fallback:matches;return {question:list.length?list[Math.floor(Math.random()*list.length)]:null,recycled:!!matches.length&&!unseen.length,available:matches.length};}
