@@ -1,5 +1,6 @@
 import {mathQuestion} from './mathEngine.js';
 import {spanishEditorialQuestions} from './spanishEditorialBank.js';
+import {spanishFundamentalExplanations} from './spanishExplanations.js';
 import {visualQuestions} from './visualBank.js';
 import {readingQuestions} from './readingBank.js';
 import {precisionQuestions} from './precisionBank.js';
@@ -55,7 +56,8 @@ function fromFact(area,level,row,i){let [topic,subtopic,prompt,right,...rest]=ro
 function spanishQuestion(base,i,level){let [topic,subtopic,prompt,right,...wrong]=base;const labels={basico:'',intermedio:'Examina el texto o enunciado y elige la opción más precisa. ',avanzado:'Evalúa cuidadosamente la interpretación y descarta los distractores. '};
  // Different stimuli at each level, while keeping logically valid options; same academic skill reviewed with increasing task framing.
  const modifiers={basico:'',intermedio:' Justifica mentalmente tu elección atendiendo al contexto.',avanzado:' Considera el sentido completo y no solo palabras aisladas.'};
- return {...fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i),reusedBasic:level!=='basico',reviewStatus:level==='basico'?'original-foundation':'legacy-level-reframe'};
+ const q=fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i);
+ return {...q,explanation:spanishFundamentalExplanations[i],wrongExplanation:'La opción elegida no corresponde al sentido del enunciado. '+spanishFundamentalExplanations[i],reusedBasic:level!=='basico',reviewStatus:level==='basico'?'original-foundation':'legacy-level-reframe'};
 }
 export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...spanishEditorialQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
