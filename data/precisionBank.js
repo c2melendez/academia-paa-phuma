@@ -274,7 +274,7 @@ export const precisionQuestions=[
     "explanation": "Misma media no implica misma consistencia ni misma adecuación a todos los grupos.",
     "optionExplanations": {
       "0": "La estética del gráfico no explica la distribución.",
-      "1": "El orden nominal no mide eficacia.",
+      "1": "El orden alfabético solo clasifica nombres; no mide resultados, variabilidad ni eficacia de los métodos.",
       "2": "Misma media no implica misma consistencia ni misma adecuación a todos los grupos.",
       "3": "Ignorar la dispersión puede ocultar resultados desfavorables."
     },
