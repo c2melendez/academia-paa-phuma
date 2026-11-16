@@ -7,3 +7,10 @@
 .plot text{font-family:system-ui,Arial,sans-serif;fill:#243a50;font-size:12px}.plot .plot-label{font-size:16px;font-weight:700}.plot .plot-value{font-size:13px;font-weight:650}.plot .plot-tick{font-size:12px}.plot .plot-pie-label{fill:#fff;font-weight:800;font-size:12px}
 html[data-theme=dark] .question-figure{background:#eef5fb;border-color:#65758a;color:#243b53}
 @media(max-width:600px){.question-figure{padding:8px}.question-figure svg{max-height:245px}}
+/* Puntaje referencial claramente separado del porcentaje de aciertos */
+.reference-score{margin:20px 0;border-left:5px solid #0e918e;background:var(--card-bg,#fff)}
+.reference-score h2{margin:7px 0;font-size:clamp(1.7rem,4vw,2.7rem);color:#118481;font-variant-numeric:tabular-nums}
+.reference-score h2 small{font-size:1rem;color:inherit;font-weight:500}
+.reference-score .muted{font-size:.88rem;line-height:1.55;max-width:850px}
+.score-ring span{display:block;text-align:center}
+[data-theme="dark"] .reference-score h2{color:#7ee2d5}
