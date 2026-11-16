@@ -230,7 +230,7 @@ export const disciplinaryQuestions=[
       "0": "La diferencia de UTC−6 a UTC−3 es de tres horas hacia adelante: 09:00 + 3 h = 12:00.",
       "1": "06:00 mueve las horas en sentido contrario.",
       "2": "09:00 no incorpora la diferencia de husos.",
-      "3": "15:00 añade seis horas, no tres."
+      "3": "La alternativa 15:00 agrega seis horas, aunque entre UTC−6 y UTC−3 la diferencia real es de tres horas."
     },
     "source": "Pregunta original vinculada a las competencias descritas en la guía PRE-U UNAH 2026, pp. 7–10.",
     "reviewStatus": "editorial-draft",
@@ -334,7 +334,7 @@ export const disciplinaryQuestions=[
       "0": "La meiosis reduce la dotación diploide 2n=10 a una dotación haploide n=5, separando homólogos en la primera división.",
       "1": "10 corresponde a la condición diploide inicial.",
       "2": "20 confunde número de cromátidas y cromosomas.",
-      "3": "2 no es la mitad de diez."
+      "3": "Dos cromosomas no representan la mitad de la dotación diploide inicial de diez; se requieren cinco."
     },
     "source": "Pregunta original vinculada a las competencias descritas en la guía PRE-U UNAH 2026, pp. 7–10.",
     "reviewStatus": "editorial-draft",
@@ -438,7 +438,7 @@ export const disciplinaryQuestions=[
       "0": "Por el teorema trabajo–energía, el trabajo neto es el cambio de energía cinética. Parte del reposo, por lo que W = ½ × 2 kg × (4 m/s)² = 16 joules.",
       "1": "8 J es la mitad del resultado y omite parte del cuadrado de la velocidad.",
       "2": "32 J duplica incorrectamente el resultado.",
-      "3": "4 J es el valor de v, no la energía."
+      "3": "Cuatro corresponde numéricamente a la velocidad final en m/s, no al trabajo medido en joules."
     },
     "source": "Pregunta original vinculada a las competencias descritas en la guía PRE-U UNAH 2026, pp. 7–10.",
     "reviewStatus": "editorial-draft",
@@ -541,7 +541,7 @@ export const disciplinaryQuestions=[
     "optionExplanations": {
       "0": "Densidades: A=80 000/400=200; B=60 000/150=400; B supera A por 200 habitantes/km².",
       "1": "El municipio A tiene menor densidad pese a más habitantes totales.",
-      "2": "La diferencia correcta es 400−200=200.",
+      "2": "La diferencia correcta es 400−200=200 habitantes por kilómetro cuadrado, no cien.",
       "3": "Las superficies distintas producen densidades diferentes."
     },
     "source": "Pregunta original vinculada a las competencias descritas en la guía PRE-U UNAH 2026, pp. 7–10.",
