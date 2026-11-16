@@ -32,3 +32,16 @@ test('Pasajes de lectura y fundamento completo para ambos modos',()=>{
   }
  }
 });
+
+test('Examen organizado por las cinco áreas oficiales y preguntas asociadas a cada lectura consecutivas',()=>{
+ const counts=[['espanol',30],['matematicas',30],['naturales',20],['sociales',20],['blandas',20]];
+ for(const level of ['basico','intermedio','avanzado'])for(let k=0;k<10;k++){
+  const exam=generateExam(level).questions;
+  let offset=0;
+  for(const [area,n] of counts){assert.ok(exam.slice(offset,offset+n).every(q=>q.area===area),area+'/'+level);offset+=n;}
+  const reading=exam.slice(0,30).filter(q=>q.passage);
+  const title=reading[0]?.passageTitle;
+  assert.ok(title,'Lectura ausente');
+  assert.ok(exam.slice(0,3).every(q=>q.passageTitle===title),'Lectura no está agrupada');
+ }
+});
