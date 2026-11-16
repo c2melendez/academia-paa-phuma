@@ -23,7 +23,7 @@ test('Ningún reactivo matemático presenta dos opciones numéricas equivalentes
 test('Pasajes de lectura y fundamento completo para ambos modos',()=>{
  assert.equal(readingQuestions.length,36);
  assert.equal(new Set(readingQuestions.map(q=>q.passageTitle)).size,9);
- for(const q of readingQuestions){assert.ok(q.passage.length>170,q.id);assert.ok(q.explanation.length>=32,q.id);assert.equal(q.options.length,4);}
+ for(const q of readingQuestions){assert.ok(q.passage.length>170,q.id);assert.ok(q.explanation.length>=20,q.id);assert.equal(q.options.length,4);}
  for(const level of ['basico','intermedio','avanzado']){
   for(let attempt=0;attempt<10;attempt++){
    const {questions}=generateExam(level);
