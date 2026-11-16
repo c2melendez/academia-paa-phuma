@@ -1,4 +1,5 @@
 import {visualQuestions} from './visualBank.js';
+import {advancedVisualQuestions} from './advancedVisualBank.js';
 import {enrichmentQuestions} from './enrichmentBank.js';
 import {foundationQuestions} from './foundationBank.js';
 import {curated} from './curated.js';
@@ -73,7 +74,7 @@ function mathQuestion(level,i){const tier={basico:0,intermedio:1,avanzado:2}[lev
  opts=[...new Set(opts.map(String))];for(let k=1;opts.length<4;k++)opts.push(String(correct)+'+'+k);const ordered=shuffle(opts,r);
  return {id:`matematicas-${level}-${i}`,area:'matematicas',topic,subtopic,level,prompt,options:ordered,correct:ordered.indexOf(String(correct)),explanation:reason,wrongExplanation:`La respuesta correcta es ${correct}. Revisa la operación indicada: ${reason}`,source:'Ejercicio original parametrizado; temas de guías PAA y PHUMA.'};
 }
-export const BANK=[...visualQuestions,...enrichmentQuestions,...foundationQuestions,...LEVELS.flatMap(({id:level})=>[
+export const BANK=[...visualQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
  ...Array.from({length:90},(_,i)=>mathQuestion(level,i)),
  ...['naturales','sociales','blandas'].flatMap(area=>curated[area][level].map((row,i)=>fromFact(area,level,row,i)))
@@ -88,7 +89,11 @@ export function generateExam(level,history=[]){
   if(candidates.length<area.count)throw Error(`Banco insuficiente para ${area.label} en ${level}`);
   const prioritize=list=>[...shuffle(list.filter(q=>!used.has(q.id)),Math.random),...shuffle(list.filter(q=>used.has(q.id)),Math.random)];
   const required=minimumVisuals[area.id]||0;
-  const mandatory=prioritize(candidates.filter(q=>q.visual)).slice(0,required);
+  const visualPool=candidates.filter(q=>q.visual);
+  const visualOrder=level==='avanzado'
+   ? [...prioritize(visualPool.filter(q=>q.reasoningDepth==='multi-step')),...prioritize(visualPool.filter(q=>q.reasoningDepth!=='multi-step'))]
+   : prioritize(visualPool);
+  const mandatory=visualOrder.slice(0,required);
   if(mandatory.length<required)throw Error(`Banco visual insuficiente para ${area.label} en ${level}`);
   // En nivel intermedio se garantizan aplicaciones contextualizadas; en avanzado,
   // varios pasos, interpretación de evidencia y decisiones razonadas.
