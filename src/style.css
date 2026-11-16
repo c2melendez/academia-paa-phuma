@@ -14,3 +14,10 @@ html[data-theme=dark] .question-figure{background:#eef5fb;border-color:#65758a;c
 .reference-score .muted{font-size:.88rem;line-height:1.55;max-width:850px}
 .score-ring span{display:block;text-align:center}
 [data-theme="dark"] .reference-score h2{color:#7ee2d5}
+
+.weak-topic-list{display:grid;gap:10px;margin-top:16px}
+.weak-topic{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #dfe6ee;padding:12px 0}
+.weak-topic span{font-weight:600}
+.weak-topic small{display:block;font-weight:400;color:#78839a;margin-top:4px}
+.weak-topic .outline{white-space:nowrap}
+@media(max-width:600px){.weak-topic{align-items:flex-start;flex-direction:column}}
