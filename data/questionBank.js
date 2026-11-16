@@ -1,4 +1,5 @@
 import {visualQuestions} from './visualBank.js';
+import {enrichmentQuestions} from './enrichmentBank.js';
 import {curated} from './curated.js';
 import {AREAS,LEVELS} from '../src/catalog.js';
 const spanishFacts=[
@@ -71,7 +72,7 @@ function mathQuestion(level,i){const tier={basico:0,intermedio:1,avanzado:2}[lev
  opts=[...new Set(opts.map(String))];for(let k=1;opts.length<4;k++)opts.push(String(correct)+'+'+k);const ordered=shuffle(opts,r);
  return {id:`matematicas-${level}-${i}`,area:'matematicas',topic,subtopic,level,prompt,options:ordered,correct:ordered.indexOf(String(correct)),explanation:reason,wrongExplanation:`La respuesta correcta es ${correct}. Revisa la operación indicada: ${reason}`,source:'Ejercicio original parametrizado; temas de guías PAA y PHUMA.'};
 }
-export const BANK=[...visualQuestions,...LEVELS.flatMap(({id:level})=>[
+export const BANK=[...visualQuestions,...enrichmentQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
  ...Array.from({length:90},(_,i)=>mathQuestion(level,i)),
  ...['naturales','sociales','blandas'].flatMap(area=>curated[area][level].map((row,i)=>fromFact(area,level,row,i)))
@@ -88,7 +89,17 @@ export function generateExam(level,history=[]){
   const required=minimumVisuals[area.id]||0;
   const mandatory=prioritize(candidates.filter(q=>q.visual)).slice(0,required);
   if(mandatory.length<required)throw Error(`Banco visual insuficiente para ${area.label} en ${level}`);
-  const chosen=[...mandatory,...prioritize(candidates.filter(q=>!mandatory.some(m=>m.id===q.id))).slice(0,area.count-required)];
+  // En nivel intermedio se garantizan aplicaciones contextualizadas; en avanzado,
+  // varios pasos, interpretación de evidencia y decisiones razonadas.
+  const quotas={
+   intermedio:{espanol:3,matematicas:5,naturales:5,sociales:5,blandas:3},
+   avanzado:{espanol:8,matematicas:12,naturales:10,sociales:8,blandas:5}
+  };
+  const minReasoning=quotas[level]?.[area.id]||0;
+  const analytical=prioritize(candidates.filter(q=>q.reasoningDepth&&!mandatory.some(m=>m.id===q.id))).slice(0,minReasoning);
+  if(analytical.length<minReasoning)throw Error('Faltan ejercicios de razonamiento para '+area.id+'/'+level);
+  const picked=new Set([...mandatory,...analytical].map(q=>q.id));
+  const chosen=[...mandatory,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-required-minReasoning)];
   repeats+=chosen.filter(q=>used.has(q.id)).length;arr.push(...chosen);
  }
  return {questions:shuffle(arr,Math.random),repeats};
