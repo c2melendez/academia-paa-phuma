@@ -97,7 +97,20 @@ export function generateExam(level,history=[]){
   const analytical=prioritize(candidates.filter(q=>q.reasoningDepth&&!seeded.some(m=>m.id===q.id))).slice(0,minReasoning);
   if(analytical.length<minReasoning)throw Error('Faltan ejercicios de razonamiento para '+area.id+'/'+level);
   const picked=new Set([...seeded,...analytical].map(q=>q.id));
-  const chosen=[...seeded,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-picked.size)];
+  // La variación numérica no equivale a un método de resolución distinto:
+  // limitar a dos apariciones por plantilla matemática dentro de un simulacro.
+  const selected=[...seeded,...analytical];
+  const remaining=prioritize(candidates.filter(q=>!picked.has(q.id)));
+  const familyCount=new Map();
+  for(const q of selected)if(q.familyId)familyCount.set(q.familyId,(familyCount.get(q.familyId)||0)+1);
+  for(const q of remaining){
+    if(selected.length>=area.count)break;
+    if(area.id==='matematicas'&&q.familyId&&(familyCount.get(q.familyId)||0)>=2)continue;
+    selected.push(q);
+    if(q.familyId)familyCount.set(q.familyId,(familyCount.get(q.familyId)||0)+1);
+  }
+  if(selected.length<area.count)throw Error('Banco insuficiente para diversidad de métodos en '+area.id+'/'+level);
+  const chosen=selected;
   if(chosen.length!==area.count||new Set(chosen.map(q=>q.id)).size!==area.count)throw Error('Distribución de reactivos inválida: '+area.id+'/'+level);
   repeats+=chosen.filter(q=>used.has(q.id)).length;
   // El formato por sección permite resolver juntas las preguntas de una lectura,
