@@ -97,6 +97,14 @@ export function generateExam(level,history=[]){
    : prioritize(visualPool);
   const mandatory=visualOrder.slice(0,required);
   if(mandatory.length<required)throw Error(`Banco visual insuficiente para ${area.label} en ${level}`);
+  // Agrupar reactivos vinculados a un mismo texto: se aproxima al formato
+  // de pasaje seguido por varias preguntas de las prácticas de admisión.
+  const passages=area.id==='espanol'?candidates.filter(q=>q.passage):[];
+  const passageGroups=Object.groupBy(passages,q=>q.passageTitle);
+  const groups=Object.values(passageGroups).filter(g=>g.length>=3)
+   .sort((a,b)=>b.filter(q=>!used.has(q.id)).length-a.filter(q=>!used.has(q.id)).length);
+  const passageQuestions=groups.length?prioritize(groups[0]).slice(0,3):[];
+  if(area.id==='espanol'&&passageQuestions.length<3)throw Error('Faltan lecturas con preguntas vinculadas en '+level);
   // En nivel intermedio se garantizan aplicaciones contextualizadas; en avanzado,
   // varios pasos, interpretación de evidencia y decisiones razonadas.
   const quotas={
@@ -104,10 +112,12 @@ export function generateExam(level,history=[]){
    avanzado:{espanol:8,matematicas:12,naturales:10,sociales:8,blandas:5}
   };
   const minReasoning=quotas[level]?.[area.id]||0;
-  const analytical=prioritize(candidates.filter(q=>q.reasoningDepth&&!mandatory.some(m=>m.id===q.id))).slice(0,minReasoning);
+  const seeded=[...mandatory,...passageQuestions];
+  const analytical=prioritize(candidates.filter(q=>q.reasoningDepth&&!seeded.some(m=>m.id===q.id))).slice(0,minReasoning);
   if(analytical.length<minReasoning)throw Error('Faltan ejercicios de razonamiento para '+area.id+'/'+level);
-  const picked=new Set([...mandatory,...analytical].map(q=>q.id));
-  const chosen=[...mandatory,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-required-minReasoning)];
+  const picked=new Set([...seeded,...analytical].map(q=>q.id));
+  const chosen=[...seeded,...analytical,...prioritize(candidates.filter(q=>!picked.has(q.id))).slice(0,area.count-picked.size-minReasoning)];
+  if(chosen.length!==area.count||new Set(chosen.map(q=>q.id)).size!==area.count)throw Error('Distribución de reactivos inválida: '+area.id+'/'+level);
   repeats+=chosen.filter(q=>used.has(q.id)).length;arr.push(...chosen);
  }
  return {questions:shuffle(arr,Math.random),repeats};
