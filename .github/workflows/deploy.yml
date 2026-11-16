@@ -17,5 +17,7 @@ jobs:
           node-version: '22'
       - name: Validate question bank and exam generator
         run: npm test
+      - name: Audit curricular coverage by level
+        run: npm run audit
       - name: Build static website for Render
         run: npm run build
