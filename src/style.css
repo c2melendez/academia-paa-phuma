@@ -21,3 +21,9 @@ html[data-theme=dark] .question-figure{background:#eef5fb;border-color:#65758a;c
 .weak-topic small{display:block;font-weight:400;color:#78839a;margin-top:4px}
 .weak-topic .outline{white-space:nowrap}
 @media(max-width:600px){.weak-topic{align-items:flex-start;flex-direction:column}}
+
+/* Lecturas extensas originales presentadas antes de la pregunta en los tres modos. */
+.reading-stimulus{margin:16px 0 23px;padding:19px 22px;background:#f1f6fb;border-left:4px solid #467db7;border-radius:10px;line-height:1.8;color:#20334c}
+.reading-stimulus p{margin:12px 0 0;max-width:85ch;white-space:pre-wrap;line-height:1.8}
+[data-theme="dark"] .reading-stimulus{background:#1b3041;color:#e0f0f9}
+@media(max-width:600px){.reading-stimulus{padding:14px 16px}}
