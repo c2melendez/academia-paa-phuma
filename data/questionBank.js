@@ -1,3 +1,4 @@
+import {mathQuestion} from './mathEngine.js';
 import {visualQuestions} from './visualBank.js';
 import {readingQuestions} from './readingBank.js';
 import {precisionQuestions} from './precisionBank.js';
@@ -54,28 +55,6 @@ function spanishQuestion(base,i,level){let [topic,subtopic,prompt,right,...wrong
  // Different stimuli at each level, while keeping logically valid options; same academic skill reviewed with increasing task framing.
  const modifiers={basico:'',intermedio:' Justifica mentalmente tu elección atendiendo al contexto.',avanzado:' Considera el sentido completo y no solo palabras aisladas.'};
  return fromFact('espanol',level,[topic,subtopic,labels[level]+prompt+modifiers[level],right,...wrong],i);
-}
-function mathQuestion(level,i){const tier={basico:0,intermedio:1,avanzado:2}[level];const r=rng(hash(`math-${level}-${i}`));const a=3+Math.floor(r()*18)+tier*4, b=2+Math.floor(r()*12)+tier*3,c=2+Math.floor(r()*7);let subtopic,topic,prompt,correct,reason;
- switch(i%15){
- case 0:topic='Aritmética';subtopic='Operaciones';prompt=`Calcula ${a} + ${b} × ${c}.`;correct=a+b*c;reason=`Jerarquía: primero ${b} × ${c} = ${b*c}; después ${a} + ${b*c} = ${correct}.`;break;
- case 1:topic='Aritmética';subtopic='Fracciones';prompt=`¿Cuánto es ${a}/${b} + ${c}/${b}? (expresa el resultado como fracción)`;correct=`${a+c}/${b}`;reason=`Con denominador común se suman numeradores: (${a}+${c})/${b} = ${correct}; es equivalente a su fracción reducida.`;break;
- case 2:topic='Aritmética';subtopic='Porcentajes';prompt=`¿Cuál es el ${c*5}% de ${a*20}?`;correct=c*5*a/5;reason=`Porcentaje = ${a*20} × ${c*5}/100 = ${correct}.`;break;
- case 3:topic='Aritmética';subtopic='Proporciones';prompt=`Si ${a} cuadernos cuestan L ${a*b}, ¿cuánto cuestan ${c+1} cuadernos al mismo precio?`;correct=(c+1)*b;reason=`El precio unitario es L ${b}; ${c+1} cuadernos cuestan L ${correct}.`;break;
- case 4:topic='Aritmética';subtopic='Potencias';prompt=`Calcula ${c}² + ${a}.`;correct=c*c+a;reason=`${c}² = ${c*c}; luego ${c*c}+${a}=${correct}.`;break;
- case 5:topic='Álgebra';subtopic='Ecuaciones';prompt=`Resuelve ${b}x + ${a} = ${a+b*c}. ¿Cuál es x?`;correct=c;reason=`Restar ${a} a ambos lados: ${b}x=${b*c}. Dividir entre ${b}: x=${c}.`;break;
- case 6:topic='Álgebra';subtopic='Sistemas de ecuaciones';prompt=`Si x+y=${a+b} y x−y=${a-b}, encuentra x.`;correct=a;reason=`Sumando ecuaciones: 2x=${2*a}, entonces x=${a}.`;break;
- case 7:topic='Álgebra';subtopic='Sucesiones';prompt=`En la sucesión ${a}, ${a+b}, ${a+2*b}, ${a+3*b}, … ¿qué valor sigue?`;correct=a+4*b;reason=`Es una sucesión aritmética de diferencia ${b}. El siguiente término es ${correct}.`;break;
- case 8:topic='Álgebra';subtopic='Funciones';prompt=`Si f(x)=${b}x+${c}, calcula f(${a}).`;correct=b*a+c;reason=`Sustituir x=${a}: f(${a})=${b}(${a})+${c}=${correct}.`;break;
- case 9:topic='Geometría';subtopic='Áreas y perímetros';prompt=`Un rectángulo mide ${a} cm de largo y ${b} cm de ancho. ¿Cuál es su área en cm²?`;correct=a*b;reason=`Área del rectángulo: largo × ancho = ${a} × ${b} = ${correct} cm².`;break;
- case 10:topic='Geometría';subtopic='Áreas y perímetros';prompt=`Un cuadrado tiene lado ${a} cm. ¿Cuál es su perímetro en cm?`;correct=4*a;reason=`Perímetro: 4 × lado = 4(${a}) = ${correct} cm.`;break;
- case 11:topic='Geometría';subtopic='Ángulos';prompt=`Dos ángulos son suplementarios. Uno mide ${a+35}°. ¿Cuánto mide el otro?`;correct=180-a-35;reason=`Los suplementarios suman 180°. Restar ${a+35}°: ${correct}°.`;break;
- case 12:topic='Geometría';subtopic='Pitágoras';prompt=`Un triángulo rectángulo tiene catetos ${3*c} y ${4*c} cm. ¿Cuál es su hipotenusa en cm?`;correct=5*c;reason=`Por Pitágoras: √((${3*c})²+(${4*c})²)=${correct} cm.`;break;
- case 13:topic='Estadística y probabilidad';subtopic='Promedios';prompt=`¿Cuál es la media de ${a}, ${a+b} y ${a+2*b}?`;correct=a+b;reason=`La suma es ${3*(a+b)} y al dividir entre 3 se obtiene ${correct}.`;break;
- default:topic='Estadística y probabilidad';subtopic='Probabilidad';prompt=`En una bolsa hay ${a} bolas verdes y ${b} bolas amarillas. ¿Qué probabilidad hay de sacar una verde?`;correct=`${a}/${a+b}`;reason=`Casos favorables / totales = ${a}/(${a}+${b}) = ${correct}.`;break;
- }
- const isFrac=typeof correct==='string';let opts=isFrac?[correct,`${a+1}/${a+b}`,`${b}/${a+b}`,`${a}/${a+b+1}`]:[correct,correct+b,correct+c+1,correct-(c+1)];
- opts=[...new Set(opts.map(String))];for(let k=1;opts.length<4;k++)opts.push(String(correct)+'+'+k);const ordered=shuffle(opts,r);
- return {id:`matematicas-${level}-${i}`,area:'matematicas',topic,subtopic,level,prompt,options:ordered,correct:ordered.indexOf(String(correct)),explanation:reason,wrongExplanation:`La respuesta correcta es ${correct}. Revisa la operación indicada: ${reason}`,source:'Ejercicio original parametrizado; temas de guías PAA y PHUMA.'};
 }
 export const BANK=[...visualQuestions,...readingQuestions,...precisionQuestions,...advancedVisualQuestions,...enrichmentQuestions,...foundationQuestions,...gapClosureQuestions,...LEVELS.flatMap(({id:level})=>[
  ...spanishFacts.map((row,i)=>spanishQuestion(row,i,level)),
