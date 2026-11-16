@@ -54,3 +54,11 @@ test('Exámenes intermedios y avanzados evitan reciclar preguntas básicas de Es
   assert.equal(spanish.filter(q=>q.reusedBasic).length,0,'No deben entrar reformulaciones cosméticas: '+level);
  }
 });
+
+test('Diversidad de métodos matemáticos: máximo dos ítems por familia parametrizada en un simulacro',()=>{
+ for(const level of ['basico','intermedio','avanzado'])for(let i=0;i<40;i++){
+  const questions=generateExam(level).questions.filter(q=>q.area==='matematicas'&&q.familyId);
+  const counts=new Map();for(const q of questions)counts.set(q.familyId,(counts.get(q.familyId)||0)+1);
+  for(const [family,count] of counts)assert.ok(count<=2,'Familia '+family+' repetida '+count+' veces en nivel '+level);
+ }
+});
