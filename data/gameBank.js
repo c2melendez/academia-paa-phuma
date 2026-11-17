@@ -1,3 +1,4 @@
+import { m1BasicQuestions } from './gameM1Basic.js';
 // Práctica original; revisión docente pendiente. Las respuestas aceptadas son explícitas.
 const source='Guía PRE-U UNAH 2026, competencias comunicativas; práctica original';
 const topic='Gramática y semántica';
@@ -15,4 +16,6 @@ const rows=[
 ['mor-co-1','Morfosintaxis','construccion','Completa con «llegó» o «llegaron»: «Las alumnas ___ temprano».',['llegaron'],'El sujeto plural «las alumnas» concuerda con «llegaron».'],
 ['mor-co-2','Morfosintaxis','construccion','Completa con «azul» o «azules»: «Los cuadernos son ___».',['azules'],'El adjetivo concuerda en número con «cuadernos».']
 ];
-export const GAME_BANK=rows.map(r=>{const [id,subtopic,game,prompt,choices,answer,explanation]=r; return game==='clasificacion'?{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,choices,accepted:[answer],explanation,source,reviewStatus:'editorial-draft'}:{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,accepted:choices,explanation:answer,source,reviewStatus:'editorial-draft'}});
+const pilotQuestions=rows.map(r=>{const [id,subtopic,game,prompt,choices,answer,explanation]=r; return game==='clasificacion'?{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,choices,accepted:[answer],explanation,source,reviewStatus:'editorial-draft'}:{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,accepted:choices,explanation:answer,source,reviewStatus:'editorial-draft'}});
+
+export const GAME_BANK=[...pilotQuestions,...m1BasicQuestions];
