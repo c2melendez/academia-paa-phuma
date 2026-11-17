@@ -27,6 +27,8 @@ jobs:
         run: npm run audit:m0
       - name: Exercise fail-closed M0 QA runner
         run: npm run qa:m0
+      - name: Verify M1 nucleus quotas and curricular routes
+        run: npm run check:m1
       - name: Upload M0 verification evidence
         if: always()
         uses: actions/upload-artifact@v4
