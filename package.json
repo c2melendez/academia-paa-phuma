@@ -10,6 +10,8 @@
     "audit": "node scripts/audit.mjs",
     "audit:quality": "node scripts/quality-audit.mjs",
     "check:syntax": "node --check src/main.js && node --check src/metrics.js && node --check src/reporting.js && node --check data/questionBank.js",
-    "audit:games": "node scripts/audit-games.mjs"
+    "audit:games": "node scripts/audit-games.mjs",
+    "audit:m0": "node scripts/m0-reconcile.mjs",
+    "qa:m0": "node scripts/qa-module.mjs M0"
   }
 }
