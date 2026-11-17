@@ -21,5 +21,7 @@ jobs:
         run: npm run audit
       - name: Audit editorial quality and template diversity
         run: npm run audit:quality
+      - name: Audit pilot game bank
+        run: npm run audit:games
       - name: Build static website for Render
         run: npm run build

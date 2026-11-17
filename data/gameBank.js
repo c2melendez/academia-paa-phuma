@@ -4,8 +4,8 @@ const topic='Gramática y semántica';
 const rows=[
 ['sin-cl-1','Sinónimos y antónimos','clasificacion','Clasifica «sereno» respecto de «tranquilo».',['Sinónimo','Antónimo'],'Sinónimo','Ambas palabras expresan calma en este contexto.'],
 ['sin-cl-2','Sinónimos y antónimos','clasificacion','Clasifica «escaso» respecto de «abundante».',['Sinónimo','Antónimo'],'Antónimo','Escaso indica poca cantidad y abundante indica mucha.'],
-['sin-co-1','Sinónimos y antónimos','construccion','Completa con un antónimo de «oscuro»: «El cuarto está muy ___».',['claro','iluminado'],'Claro o iluminado expresan la idea contraria en esta oración.'],
-['sin-co-2','Sinónimos y antónimos','construccion','Completa con un sinónimo de «iniciar»: «Vamos a ___ la reunión».',['comenzar','empezar'],'Comenzar y empezar pueden sustituir iniciar en esta oración.'],
+['sin-co-1','Sinónimos y antónimos','construccion','Completa con «claro» o «cerrado»: «El cuarto está muy ___» (opuesto de oscuro).',['claro'],'Claro expresa la idea contraria a oscuro en esta oración.'],
+['sin-co-2','Sinónimos y antónimos','construccion','Completa con «comenzar» o «terminar»: «Vamos a ___ la reunión» (sinónimo de iniciar).',['comenzar'],'Comenzar puede sustituir iniciar en esta oración.'],
 ['coh-cl-1','Cohesión y coherencia','clasificacion','En «Llovía; por eso cancelaron el partido», ¿qué relación introduce «por eso»?',['Causa','Consecuencia','Contraste'],'Consecuencia','La cancelación se presenta como resultado de la lluvia.'],
 ['coh-cl-2','Cohesión y coherencia','clasificacion','En «Estudió; sin embargo, no aprobó», ¿qué relación introduce «sin embargo»?',['Adición','Consecuencia','Contraste'],'Contraste','El conector opone el resultado a lo esperado tras estudiar.'],
 ['coh-co-1','Cohesión y coherencia','construccion','Completa con «porque» o «aunque»: «No salió ___ estaba enferma».',['porque'],'Porque introduce la causa de que no saliera.'],
