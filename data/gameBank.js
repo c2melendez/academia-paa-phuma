@@ -1,3 +1,4 @@
+import { m1ExtendedQuestions } from './gameM1Extended.js';
 import { m1BasicQuestions } from './gameM1Basic.js';
 // Práctica original; revisión docente pendiente. Las respuestas aceptadas son explícitas.
 const source='Guía PRE-U UNAH 2026, competencias comunicativas; práctica original';
@@ -18,4 +19,4 @@ const rows=[
 ];
 const pilotQuestions=rows.map(r=>{const [id,subtopic,game,prompt,choices,answer,explanation]=r; return game==='clasificacion'?{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,choices,accepted:[answer],explanation,source,reviewStatus:'editorial-draft'}:{id,area:'espanol',topic,subtopic,game,level:'basico',prompt,accepted:choices,explanation:answer,source,reviewStatus:'editorial-draft'}});
 
-export const GAME_BANK=[...pilotQuestions,...m1BasicQuestions];
+export const GAME_BANK=[...pilotQuestions,...m1BasicQuestions,...m1ExtendedQuestions];
