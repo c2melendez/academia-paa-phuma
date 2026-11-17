@@ -23,5 +23,16 @@ jobs:
         run: npm run audit:quality
       - name: Audit pilot game bank
         run: npm run audit:games
+      - name: Reconcile M0 inventory and deficits
+        run: npm run audit:m0
+      - name: Exercise fail-closed M0 QA runner
+        run: npm run qa:m0
+      - name: Upload M0 verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m0-verification
+          path: reports/*.json
+          if-no-files-found: warn
       - name: Build static website for Render
         run: npm run build
