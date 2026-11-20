@@ -30,3 +30,15 @@ Se agregaron `data/gameM1Basic.js` (48 preguntas) y `data/gameM1Extended.js` (21
 4. Solo tras auditoría editorial, continuar con M2 de las combinaciones aceptadas (20/35/45 acumulados).
 
 Referencia de ejecución: `npm test && npm run audit:games && npm run audit:m0 && npm run check:m1 && npm run build`.
+
+## Reconciliación verificada — 19 de noviembre de 2026
+
+Esta actualización registra evidencia **comprobada por conectores de GitHub y Render**, sin volver a generar los 270 registros existentes ni certificar su independencia conceptual.
+
+- Rama canónica verificada: `main`, SHA de referencia anterior a esta actualización: `d16e8612042775cd62593c20cddf08f77cd24a78`.
+- GitHub Actions para ese SHA: workflow `Validate and build Academia PAA PHUMA`, ejecución `44079742508`, estado `completed`, conclusión `success`. Evidencia: https://github.com/c2melendez/academia-paa-phuma/actions/runs/44079742508
+- Render: servicio `srv-dbthiauc6qcc73987gng`, despliegue `dep-dbu45ke7bikc739khmg0`, estado `live` y SHA `d16e8612042775cd62593c20cddf08f77cd24a78`. AutoDeploy habilitado sobre `main`.
+- Matriz M1 registrada en este repositorio: **Español**, 3 subtemas × 2 juegos × 3 niveles = 18 combinaciones; 270 registros técnicos. Su control automatizado no acredita independencia semántica ni dificultad pedagógica.
+- **Nota de alcance:** el archivo operativo `Sistema_modulos_Academia_PHUMA_Play(3).md` (v5.4, 17-11-2026) señala expresamente `c2melendez/desafio-gramatical` como repositorio canónico de **Academia PHUMA Play** y excluye `academia-paa-phuma` como destino de esa ejecución. Esta actualización se limita al repositorio `academia-paa-phuma` indicado expresamente en la solicitud más reciente; no traslada metas ni certificaciones del otro proyecto.
+
+**Estado:** evidencia de CI y Render del SHA de referencia reconciliada; auditoría editorial/docente y revisión de independencia conceptual siguen pendientes. El nuevo commit documental deberá obtener sus propios resultados de CI y Render para quedar técnicamente publicado bajo el criterio de SHA coincidente.
